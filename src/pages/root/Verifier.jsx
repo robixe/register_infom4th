@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {rootauth} from '../../help';
 
 function Verifier() {
   const [userStatus, setUserStatus] = useState(''); // State to hold user status
@@ -23,7 +24,7 @@ function Verifier() {
   const updateMembershipStatus = async () => {
     console.log("update");
   };
-
+  rootauth();
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg">

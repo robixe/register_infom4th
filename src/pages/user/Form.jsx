@@ -1,19 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import {auth} from '../../help';
 export default function Form() {
   const navigate = useNavigate();
 
   // Define your role variable here or fetch it as needed
-  const role = localStorage.getItem("role"); // Example of fetching role from localStorage
+    auth();
 
-  useEffect(() => {
-    const token = localStorage.getItem("Token");
-    if (!token && role !== "user") {
-      console.log("You do not have a token");
-      navigate('/');
-    }
-  }, [role, navigate]);
+    
+    
 
   const [formData, setFormData] = useState({
     first: "", 
@@ -21,7 +16,6 @@ export default function Form() {
     birth: "",
     gender: "",
     phone: "",
-    email: "",
     study: "", 
     over18: false,
     acceptTerms: false,
@@ -41,7 +35,6 @@ export default function Form() {
     const newErrors = {};
     if (!formData.first) newErrors.first = "First name is required";
     if (!formData.last) newErrors.last = "Last name is required";
-    if (!formData.email) newErrors.email = "Email is required";
     if (!formData.phone) newErrors.phone = "Phone number is required";
     if (!formData.birth) newErrors.birth = "Birth date is required";
     if (!formData.over18) newErrors.over18 = "You must confirm you are 18 or older.";
@@ -54,6 +47,7 @@ export default function Form() {
     const validationErrors = validate();
   
     if (Object.keys(validationErrors).length === 0) {
+    console.log(formData)
       try {
         const response = await fetch("https://infom4th-api.robixe.online/form", {
           method: "POST",
@@ -152,19 +146,6 @@ export default function Form() {
             />
             {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
           </div>
-
-          <div>
-            <label className="text-[14px] text-gray-700">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="border rounded w-full py-2 px-3"
-            />
-            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-          </div>
-
           <div>
             <label className="text-[14px] text-gray-700">Field of Study</label>
             <select

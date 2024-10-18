@@ -16,7 +16,7 @@ export default function Login() {
     if (email && password) {
       try {
         const hashedPassword = CryptoJS.MD5(password).toString(); 
-        const response = await fetch('https://infom4th-api.robixe.online/log-in', {
+        const response = await fetch('https://infom4th-api.robixe.online/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -32,6 +32,7 @@ export default function Login() {
           const data = await response.json();
           console.log('Login successful:', data);
           localStorage.setItem("Token",data.token);
+          localStorage.setItem("role",data.role);
           window.location.href = '/form';
         } else if (response.status === 400) {
           throw new Error('Bad Request: Missing credentials.');

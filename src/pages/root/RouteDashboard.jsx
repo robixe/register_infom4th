@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {rootauth} from '../../help';
 
 // Sample student data
 const initialStudents = [
@@ -11,7 +12,7 @@ const initialStudents = [
 function RootDashboard() {
   const [searchTerm, setSearchTerm] = useState(''); // State for the search term
   const [students] = useState(initialStudents); // State to hold student data
-
+  rootauth();
   // Filtered students based on search term
   const filteredStudents = students.filter((student) =>
     student.name.toLowerCase().includes(searchTerm.toLowerCase())

@@ -1,6 +1,7 @@
 import { QRCodeCanvas } from 'qrcode.react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {auth} from '../../help';
 export default function Dashboard() {
   const [formData, setFormData] = useState(null);
 
@@ -11,7 +12,7 @@ export default function Dashboard() {
       setFormData(storedData ? JSON.parse(storedData) : null);
     }
   }, []);
-
+  auth();
   // If there's no formData, return a message instead of the main content
   if (!formData) {
     return (

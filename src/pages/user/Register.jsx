@@ -29,7 +29,7 @@ export default function Register() {
     });
 
     try {
-      const response = await fetch('https://infom4th-api.robixe.online/sgin-in', {
+      const response = await fetch('https://infom4th-api.robixe.online/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
