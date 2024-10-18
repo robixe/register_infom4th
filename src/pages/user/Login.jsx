@@ -112,7 +112,7 @@ export default function Login() {
       </form>
       <div className="mt-6 text-[12px] lg:-ml-[22%] ml-[10%]">
        <a href="#" className="underline hover:no-underline mb-1 block">Mot de passe oublié ?</a>
-       <a href="./root/admin" className="underline hover:no-underline mb-1 block">Se connecter en Admin</a>
+       <a href="/root/" className="underline hover:no-underline mb-1 block">Se connecter en Admin</a>
        <a href="#" className="underline hover:no-underline mb-1 block">
         Vous n'avez pas reçu le courriel de confirmation ?
        </a>
