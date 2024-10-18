@@ -32,7 +32,7 @@ export default function Login() {
           const data = await response.json();
           console.log('Login successful:', data);
           localStorage.setItem("Token",data.token);
-          // window.location.href = '/form';
+          window.location.href = '/form';
         } else if (response.status === 400) {
           throw new Error('Bad Request: Missing credentials.');
         } else if (response.status === 401) {
@@ -67,9 +67,11 @@ export default function Login() {
         Tu as sans doute toutes les meilleures raisons du monde pour
         t’inscrire à INFOM4th, ne perds plus de temps.
       </p>
-      <button className="bg-black  font-bold text-white px-6 py-3 ">
+      <Link to="/register" >
+      <button  className="bg-black  font-bold text-white px-6 py-3 ">
         DÉPOSE TA CANDIDATURE
       </button>
+      </Link>
     </div>
 
     <div className="w-full md:w-1/2 relative min-h-screen">
@@ -111,7 +113,7 @@ export default function Login() {
         </div>
       </form>
       <div className="mt-6 text-[12px] lg:-ml-[22%] ml-[10%]">
-       <a href="#" className="underline hover:no-underline mb-1 block">Mot de passe oublié ?</a>
+       <a  href="/password" className="underline hover:no-underline mb-1 block">Mot de passe oublié ?</a>
        <a href="/root/" className="underline hover:no-underline mb-1 block">Se connecter en Admin</a>
        <a href="#" className="underline hover:no-underline mb-1 block">
         Vous n'avez pas reçu le courriel de confirmation ?

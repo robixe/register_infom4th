@@ -142,7 +142,6 @@ export default function Register() {
         </div>
       </form>
       <div className="mt-6 text-[12px] lg:-ml-[22%] -ml-[1%]">
-       <a href="/password" className="underline hover:no-underline mb-1 block">Mot de passe oublié ?</a>
        <a href="#" className="underline hover:no-underline mb-1 block">
         Vous n'avez pas reçu le courriel de confirmation ?
        </a>

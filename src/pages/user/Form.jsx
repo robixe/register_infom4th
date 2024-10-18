@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Form() {
-  const router = useNavigate();
+  const navigate = useNavigate();
 
   // Define your role variable here or fetch it as needed
   const role = localStorage.getItem("role"); // Example of fetching role from localStorage
@@ -11,18 +11,18 @@ export default function Form() {
     const token = localStorage.getItem("Token");
     if (!token && role !== "user") {
       console.log("You do not have a token");
-      // You may want to redirect or show an error message here
+      navigate('/');
     }
-  }, [role]);
+  }, [role, navigate]);
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    birthDate: "",
+    first: "", 
+    last: "",
+    birth: "",
     gender: "",
     phone: "",
     email: "",
-    field: "",
+    study: "", 
     over18: false,
     acceptTerms: false,
   });
@@ -39,27 +39,42 @@ export default function Form() {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.firstName) newErrors.firstName = "First name is required";
-    if (!formData.lastName) newErrors.lastName = "Last name is required";
+    if (!formData.first) newErrors.first = "First name is required";
+    if (!formData.last) newErrors.last = "Last name is required";
     if (!formData.email) newErrors.email = "Email is required";
     if (!formData.phone) newErrors.phone = "Phone number is required";
-    if (!formData.birthDate) newErrors.birthDate = "Birth date is required";
+    if (!formData.birth) newErrors.birth = "Birth date is required";
     if (!formData.over18) newErrors.over18 = "You must confirm you are 18 or older.";
     if (!formData.acceptTerms) newErrors.acceptTerms = "You must accept the terms and conditions.";
-    
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
-
+  
     if (Object.keys(validationErrors).length === 0) {
-      // If there are no validation errors, save the data to local storage
-      localStorage.setItem("formData", JSON.stringify(formData));
-      
-      // Navigate to the Profile page
-      router.push('/profile');
+      try {
+        const response = await fetch("https://infom4th-api.robixe.online/form", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Data submitted successfully:", data);
+
+          navigate("/dashboard");
+        } else {
+          console.error(`Error: ${response.status} - ${response.statusText}`);
+        }
+      } catch (error) {
+        console.error("Failed to submit data:", error);
+      }
     } else {
       setErrors(validationErrors);
     }
@@ -80,36 +95,36 @@ export default function Form() {
             <label className="text-[14px] text-gray-700">First Name</label>
             <input
               type="text"
-              name="firstName"
-              value={formData.firstName}
+              name="first"
+              value={formData.first}
               onChange={handleChange}
               className="border rounded w-full py-2 px-3"
             />
-            {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
+            {errors.first && <p className="text-red-500 text-sm">{errors.first}</p>}
           </div>
 
           <div>
             <label className="text-[14px] text-gray-700">Last Name</label>
             <input
               type="text"
-              name="lastName"
-              value={formData.lastName}
+              name="last"
+              value={formData.last}
               onChange={handleChange}
               className="border rounded w-full py-2 px-3"
             />
-            {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
+            {errors.last && <p className="text-red-500 text-sm">{errors.last}</p>}
           </div>
 
           <div>
             <label className="text-[14px] text-gray-700">Birth Date</label>
             <input
               type="date"
-              name="birthDate"
-              value={formData.birthDate}
+              name="birth"
+              value={formData.birth}
               onChange={handleChange}
               className="border rounded w-full py-2 px-3"
             />
-            {errors.birthDate && <p className="text-red-500 text-sm">{errors.birthDate}</p>}
+            {errors.birth && <p className="text-red-500 text-sm">{errors.birth}</p>}
           </div>
 
           <div>
@@ -153,8 +168,8 @@ export default function Form() {
           <div>
             <label className="text-[14px] text-gray-700">Field of Study</label>
             <select
-              name="field"
-              value={formData.field}
+              name="study"
+              value={formData.study}
               onChange={handleChange}
               className="border rounded text-[14px] w-full py-2 px-3 mb-10"
             >
