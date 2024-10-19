@@ -61,10 +61,10 @@ export default function Dashboard() {
   const fetchUserInfo = useCallback(async () => {
     try {
       const token = localStorage.getItem('Token');
-      const response = await fetch('https://infom4th-api.robixe.online/info', {
+      const response = await fetch('https://infom4th-api.robixe.online/info/all', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token }),
+        body: JSON.stringify({ token }), // Send token in the request body
       });
 
       if (!response.ok) {
@@ -72,14 +72,14 @@ export default function Dashboard() {
       }
 
       const data = await response.json();
-      if (data.seat != null) {
-        console.log(spotTaken);
-      }
-      if (!data.first || !data.last || !data.gender || !data.birth || !data.phone || !data.study) {
-        window.location.href = '/form';
+      const currentUser = data.find(user => user.first === JSON.parse(localStorage.getItem('info')).first); // Assuming email is stored in localStorage
+      console.log(currentUser);
+
+      if (currentUser) {
+        localStorage.setItem('info', JSON.stringify(currentUser));
+        setFormData(currentUser);
       } else {
-        localStorage.setItem('info', JSON.stringify(data));
-        setFormData(data);
+        console.error('User not found in the response data.');
       }
     } catch (error) {
       console.error('Error fetching user information:', error);
@@ -172,7 +172,8 @@ export default function Dashboard() {
           <p className="mb-1"><strong>Gender:</strong> {formData.gender}</p>
           <p className="mb-1"><strong>Phone:</strong> {formData.phone}</p>
           <p className="mb-1"><strong>Email:</strong> {formData.email}</p>
-          <p><strong>Field of Study:</strong> {formData.study}</p>
+          <p className="mb-1"><strong>Field of Study:</strong> {formData.study}</p>
+          <p className="mb-1"><strong>Verification :</strong> {formData.auth}</p>
           <div className="mt-6">
             <h3 className="text-1xl text-gray-600 font-bold mb-6">Scan this QR Code for your Information:</h3>
             <QRCodeCanvas value={qrData} size={156} aria-label="QR code containing candidate information" />
@@ -185,8 +186,8 @@ export default function Dashboard() {
               <div key={event.id} className="mb-6">
                 <p className="mb-1"><strong>Name:</strong> {event.name}</p>
                 <p className="mb-1"><strong>Description:</strong> {event.description}</p>
-                <p className="mb-1"><strong>Start :</strong> {event.start}</p>
-                <p className="mb-1"><strong>End :</strong> {event.end}</p>
+                <p className="mb-1"><strong>Start:</strong> {event.start}</p>
+                <p className="mb-1"><strong>End:</strong> {event.end}</p>
                 <p className="mb-1"><strong>Available Seats:</strong> {event.available} / {event.total}</p>
                 <button
                   onClick={() => handleTakeSpot(event.id)}

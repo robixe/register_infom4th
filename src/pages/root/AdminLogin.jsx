@@ -29,7 +29,7 @@ export default function AdminLogin() {
                     console.log('Admin login successful:', data);
                     localStorage.setItem("Token", data.token);
                     if (data.role == "root") {
-                        localStorage.setItem("Token", data.token);
+                        localStorage.setItem("token", data.token);
                         localStorage.setItem("role", data.role);
                         window.location.href = '/root/dashboard';
                         console.log("nadi")

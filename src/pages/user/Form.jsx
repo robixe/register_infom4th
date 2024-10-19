@@ -77,6 +77,7 @@ export default function Form() {
         if (response.ok) {
           const data = await response;
           console.log("Data submitted successfully:", data);
+          localStorage.setItem("info",JSON.stringify(formData));
           navigate("/dashboard");
         } else {
           const errorText = await response.text();
