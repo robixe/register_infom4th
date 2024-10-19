@@ -196,7 +196,7 @@ export default function Dashboard() {
                 <p className="mb-1"><strong>Description:</strong> {event.description}</p>
                 <p className="mb-1"><strong>Start:</strong> {event.start}</p>
                 <p className="mb-1"><strong>End:</strong> {event.end}</p>
-                <p className="mb-1"><strong>Available Seats:</strong> {event.available} / {event.total}</p>
+                <p className="mb-1"><strong>Available Seats:</strong> {event.total -  event.available} / {event.total}</p>
                 <button
                   onClick={() => handleTakeSpot(event.id)}
                   className={`mt-4 px-4 py-2 rounded text-white ${takingSpot || spotTaken.includes(event.id) || event.available === 0 ? 'bg-gray-400' : 'bg-blue-600'}`}

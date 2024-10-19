@@ -26,7 +26,10 @@ const EventForm = () => {
             }
 
             const data = await response.json();
+            console.log(data);
             setEvents(data); // Set the fetched events
+            localStorage.setItem("event", JSON.stringify(data));
+
         } catch (error) {
             console.error('Error fetching events:', error);
         } finally {
@@ -71,34 +74,61 @@ const EventForm = () => {
         }
     };
 
-    const addSpot = async (eventId) => {
-        const count = prompt("Enter the number of spots to add:"); // Prompt user for the number of spots
-        if (!count || isNaN(count) || count <= 0) {
-            alert("Please enter a valid number of spots.");
-            return;
+    const deleteEvent = async (eventId) => {
+        if (window.confirm("Are you sure you want to delete this event?")) {
+            const token = localStorage.getItem("token");
+            try {
+                const response = await fetch('https://infom4th-api.robixe.online/events/delete', {
+                    method: 'POST', // Use POST method as specified
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: eventId , token : token })
+                });
+                if (response.ok) {
+                    const jsonResponse = await response;
+                    console.log('Event deleted successfully:', jsonResponse);
+                    
+                    alert('Event deleted successfully!');
+                    // Optionally, fetch events again to update the list
+                    fetchEvents();
+                } else {
+                    console.error('Error deleting event:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
         }
+    };
+
+    const addSpot = async (eventId) => {
+    con
+        const seatData = {
+            count: count, // Number of seats to add
+            id: eventId, // Event ID
+        };
 
         try {
-            const token = localStorage.getItem('Token'); // Retrieve token from local storage
             const response = await fetch('https://infom4th-api.robixe.online/seats/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ count: Number(count), id: eventId }), // Send count and event ID
+                body: JSON.stringify(seatData), // Send the seat data in the request body
             });
 
             if (response.ok) {
                 const jsonResponse = await response.json();
-                console.log('Spots added successfully:', jsonResponse);
-                alert('Spots added successfully!');
-                // Optionally, fetch events again to update the list
-                fetchEvents();
+                console.log('Seats added successfully:', jsonResponse);
+                alert('Seats added successfully!');
+                // Optionally, you can fetch events again to update the list or handle UI updates
             } else {
-                console.error('Error adding spots:', response.statusText);
+                console.error('Error adding seats:', response.statusText);
+                alert('Error adding seats. Please try again.');
             }
         } catch (error) {
             console.error('Error:', error);
+            alert('An error occurred while adding seats.');
         }
     };
 
@@ -109,7 +139,7 @@ const EventForm = () => {
     return (
         <div className="min-h-screen bg-gray-100 ">
             {/* Navigation Bar */}
-            <nav className="w-full bg-blue-600 p-4 text-white flex justify-between items-center rounded-md shadow-md">
+            <nav className="w-full bg-blue-600 p-4 text-white flex justify-between items-center ">
                 <div className="text-lg font-bold">Dashboard</div>
                 <div className="flex space-x-4">
                     <a href="/root/dashboard" className="hover:text-blue-200">Students</a>
@@ -193,11 +223,19 @@ const EventForm = () => {
                                         <p>{event.description}</p>
                                         <p><strong>Start:</strong> {event.start}</p>
                                         <p><strong>End:</strong> {event.end}</p>
+                                        <p><strong>Total:</strong> {event.total}</p>
+                                        <p><strong>Available:</strong> {event.available}</p>
                                         <button
                                             onClick={() => addSpot(event.id)} // Add spot button
                                             className="mt-2 bg-green-500 text-white py-1 px-3 rounded-md hover:bg-green-600"
                                         >
                                             Add Spots
+                                        </button>
+                                        <button
+                                            onClick={() => deleteEvent(event.id)} // Delete event button
+                                            className="mt-2 bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 ml-2"
+                                        >
+                                            Delete Event
                                         </button>
                                     </li>
                                 ))
