@@ -26,8 +26,16 @@ function Verifier() {
   };
   rootauth();
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
+    <div className="flex flex-col  items-center min-h-screen bg-gray-100">
+      <nav className="w-full bg-blue-600 p-4 text-white flex justify-between items-center">
+            <div className="text-lg font-bold">Dashboard</div>
+            <div className="flex space-x-4">
+                <a href="/root/dashboard" className="hover:text-blue-200">Students</a>
+                <a href="/root/event" className="hover:text-blue-200">Events</a>
+                <a href="/root/verification" className="hover:text-blue-200">Verification</a>
+            </div>
+        </nav>
+      <div className="bg-white mt-8 p-6 rounded-lg shadow-md w-full max-w-lg">
         <h1 className="text-2xl font-bold mb-4">JSON Input for User Check</h1>
         <textarea
           rows="6"

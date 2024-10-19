@@ -10,6 +10,7 @@ import Dashboard from './pages/user/Dashboard';
 import AdminLogin from './pages/root/AdminLogin';
 import Verifier from './pages/root/Verifier';
 import RouteDashboard from './pages/root/RouteDashboard';
+import EventForm from './pages/root/Event';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,6 +27,7 @@ function App() {
         <Route path='/root/' element={<AdminLogin/>} />
         <Route path='/root/verification' element={<Verifier/>} />
         <Route path='/root/dashboard' element={<RouteDashboard/>} />
+        <Route path='/root/event' element={<EventForm  />} />
       </Routes>
     </Router>
   )

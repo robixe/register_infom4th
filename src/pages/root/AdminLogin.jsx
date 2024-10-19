@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CryptoJS from 'crypto-js';
 import { Link } from 'react-router-dom';
 
+
 export default function AdminLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

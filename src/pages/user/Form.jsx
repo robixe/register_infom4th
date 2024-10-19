@@ -8,7 +8,11 @@ export default function Form() {
 
   // Define your role variable here or fetch it as needed
     auth();
-
+    const info = localStorage.getItem("info");
+    if (info)
+    {
+      window.location.href= "/dashboard" ;
+    }
   const [formData, setFormData] = useState({
     first: "", 
     last: "",
@@ -44,23 +48,24 @@ export default function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
-  
+    confirm("are u sure this informatios is correct");
     if (Object.keys(validationErrors).length === 0) {
       try {
       const token = localStorage.getItem("Token");
       console.log("Token:", token);
 
       const requestBody = {
-        token,
+        token : token,
         data: {
           first: formData.first,
           last:  formData.last,
           birth: formData.birth,
+          gender : formData.gender,
           phone: formData.phone,
           study: formData.study,
         },
       };
-
+      console.log(requestBody);
         const response = await fetch("https://infom4th-api.robixe.online/form", {
           method: "POST",
           headers: {
@@ -70,7 +75,7 @@ export default function Form() {
         });
   
         if (response.ok) {
-          const data = await response.json();
+          const data = await response;
           console.log("Data submitted successfully:", data);
           navigate("/dashboard");
         } else {
@@ -141,8 +146,8 @@ export default function Form() {
               className="border rounded w-full py-2 px-3"
             >
               <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
             </select>
           </div>
 
