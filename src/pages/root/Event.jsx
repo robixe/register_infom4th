@@ -102,9 +102,9 @@ const EventForm = () => {
     };
 
     const addSpot = async (eventId) => {
-    con
+        const count = prompt("Enter the number of seats to add:"); // Prompt to get count
         const seatData = {
-            count: count, // Number of seats to add
+            count: parseInt(count, 10), // Convert count to an integer
             id: eventId, // Event ID
         };
 
@@ -118,7 +118,7 @@ const EventForm = () => {
             });
 
             if (response.ok) {
-                const jsonResponse = await response.json();
+                const jsonResponse = await response;
                 console.log('Seats added successfully:', jsonResponse);
                 alert('Seats added successfully!');
                 // Optionally, you can fetch events again to update the list or handle UI updates
