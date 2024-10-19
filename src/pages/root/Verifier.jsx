@@ -6,6 +6,7 @@ function Verifier() {
   const [loading, setLoading] = useState(false); // State to manage loading status
   const [jsonInput, setJsonInput] = useState(''); // State to hold JSON input
   const [userData, setUserData] = useState(null); // State to hold user data
+  const [membershipType, setMembershipType] = useState('basic'); // State to hold membership type
 
   const handleJsonInput = async () => {
     setLoading(true); // Set loading state to true
@@ -41,7 +42,62 @@ function Verifier() {
   };
 
   const updateMembershipStatus = async () => {
-    console.log("update");
+    const token = localStorage.getItem("token"); // Retrieve token from local storage
+    const body = {
+      token: token, // Token for authentication
+      memberId: userData.auth, // Assuming userData contains the member ID
+      newType: membershipType, // New membership type
+    };
+    console.log(body);
+    try {
+      const response = await fetch('https://infom4th-api.robixe.online/members/modify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body), // Send the body as JSON
+      });
+
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        console.log('Membership status updated successfully:', jsonResponse);
+        alert('Membership status updated successfully!');
+        // Optionally, you can refresh user data or update UI here
+      } else {
+        console.error('Error updating membership status:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while updating membership status.');
+    }
+    handleJsonInput();
+  };
+
+  const updatePaymentStatus = async (paymentStatus) => {
+    const token = localStorage.getItem("token"); // Retrieve token from local storage
+    const body = {
+      token: token, // Token for authentication
+      memberId: userData.auth, // Assuming userData contains the member ID
+      paymentStatus: paymentStatus, // Set payment status based on button clicked
+    };
+
+    try {
+      const response = await fetch('https://infom4th-api.robixe.online/members/payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body), // Send the body as JSON
+      });
+
+      if (response.ok) {
+        const jsonResponse = await response.json();
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while updating payment status.');
+    }
+    handleJsonInput();
   };
 
   rootauth();
@@ -57,7 +113,7 @@ function Verifier() {
         </div>
       </nav>
       <div className="bg-white mt-8 p-6 rounded-lg shadow-md w-full max-w-lg">
-        <h1 className="text-2xl font-bold mb-4">Code Virification Input for User Check</h1>
+        <h1 className="text-2xl font-bold mb-4">Code Verification Input for User Check</h1>
         <input
           type='text'
           placeholder='Code de verification'
@@ -82,24 +138,37 @@ function Verifier() {
             <p><strong>Gender:</strong> {userData.gender}</p>
             <p><strong>Birth Date:</strong> {userData.birth}</p>
             <p><strong>Study:</strong> {userData.study}</p>
-            <p><strong>Payment:</strong> {userData.payment === null ? 'Not Paid' : 'Paid'}</p>
+            <p><strong>Pack:</strong> {userData.pack}</p>
+            <p><strong>Payment:</strong> {userData.payment === "0" ? 'Not Paid' : 'Paid'}</p>
             <p><strong>Seats:</strong> {userData.seat ? userData.seat.map(seat => seat.name).join(', ') : 'No seats reserved'}</p>
           </div>
         )}
-        {userData && userData.payment === null && (
+        {userData && (
           <div className="mt-4">
+            <button
+              className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200"
+              onClick={() => updatePaymentStatus(true)} // Mark as paid
+            >
+              Mark as Paid
+            </button>
+            <button
+              className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition duration-200 mt-2"
+              onClick={() => updatePaymentStatus(false)} // Mark as unpaid
+            >
+              Mark as Unpaid
+            </button>
             <select
               className="w-full p-2 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               onChange={(e) => setMembershipType(e.target.value)}
             >
-              <option value="basic">Pack Begin</option>
-              <option value="pro">Pack Pro</option>
+              <option value="begin">Pack Begin</option>
+              <option value="vip">Pack Pro</option>
             </select>
             <button
               className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200"
-              onClick={() => updateMembershipStatus(true)}
+              onClick={updateMembershipStatus} // Update membership status
             >
-              Mark as Paid
+              Update Membership Status
             </button>
           </div>
         )}
