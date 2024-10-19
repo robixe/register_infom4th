@@ -93,12 +93,20 @@ export default function Dashboard() {
     if (takingSpot || spotTaken.includes(eventId)) return; // Prevent taking if spot already taken
     setTakingSpot(true);
 
+    // Prompt for the number of spots to add
+    const count = prompt("Enter the number of spots to add:");
+    if (!count || isNaN(count) || count <= 0) {
+      alert("Please enter a valid number of spots.");
+      setTakingSpot(false);
+      return;
+    }
+
     try {
       const token = localStorage.getItem('Token');
       const response = await fetch('https://infom4th-api.robixe.online/seats/take', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, event: eventId }),
+        body: JSON.stringify({ token, event: eventId, count: Number(count) }), // Include count in the request
       });
 
       if (response.ok) {
