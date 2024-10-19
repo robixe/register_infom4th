@@ -130,6 +130,7 @@ const EventForm = () => {
             console.error('Error:', error);
             alert('An error occurred while adding seats.');
         }
+        fetchEvents();
     };
 
     useEffect(() => {
