@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {auth} from '../../help';
+
+
 export default function Form() {
   const navigate = useNavigate();
 
   // Define your role variable here or fetch it as needed
     auth();
-
-    
-    
 
   const [formData, setFormData] = useState({
     first: "", 
@@ -47,24 +46,36 @@ export default function Form() {
     const validationErrors = validate();
   
     if (Object.keys(validationErrors).length === 0) {
-    console.log(formData)
       try {
+      const token = localStorage.getItem("Token");
+      console.log("Token:", token);
+
+      const requestBody = {
+        token,
+        data: {
+          first: formData.first,
+          last:  formData.last,
+          birth: formData.birth,
+          phone: formData.phone,
+          study: formData.study,
+        },
+      };
+
         const response = await fetch("https://infom4th-api.robixe.online/form", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("Token")}`,
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(requestBody),
         });
   
         if (response.ok) {
           const data = await response.json();
           console.log("Data submitted successfully:", data);
-
           navigate("/dashboard");
         } else {
-          console.error(`Error: ${response.status} - ${response.statusText}`);
+          const errorText = await response.text();
+          console.error(`Error: ${response.status} - ${errorText}`);
         }
       } catch (error) {
         console.error("Failed to submit data:", error);
