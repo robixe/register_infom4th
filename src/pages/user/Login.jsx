@@ -35,13 +35,12 @@ export default function Login() {
           localStorage.setItem("loginTimestamp", Date.now()); // Save current timestamp
 
           // Check authentication status
-          if (auth()) {
+          
             if (data.role === "user") {
               window.location.href = '/form';
             } else {
               window.location.href = '/root/';
             }
-          }
         } else {
           handleErrorResponse(response);
         }
