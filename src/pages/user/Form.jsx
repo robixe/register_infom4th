@@ -105,7 +105,18 @@ export default function Form() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-300 via-blue-100 to-gray-300 p-10">
-    <div className="container max-w-5xl mx-auto p-10 bg-white/80 backdrop-blur-lg shadow-2xl rounded-xl -mt-1">
+      <div className="-mt-4 lg:ml-[44%] ml-[28%] mb-5">
+      <a
+        href="https://www.instagram.com/robixe.online/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex space-x-2 hover:text-blue-800"
+      >
+        <img src="/Robixe.png" alt="Robixe Logo" className="w-6 h-6  -mt-1 " />
+        <span className="text-[12px] font-bold ">Developed by Robixe</span>
+      </a>
+    </div>
+    <div className="container max-w-5xl mx-auto p-10 bg-white/80 backdrop-blur-lg shadow-2xl rounded-xl -mt-1 ">
     <h1 className="lg:text-[34px] text-[30px] font-bold text-blue-800 text-center mb-2 -mt-4">Candidate Information</h1>
     <p className="text-center text-lg font-semibold text-gray-700 mb-2">
       Tell us a little more about yourself

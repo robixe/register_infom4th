@@ -110,8 +110,27 @@ function Verifier() {
         <a href="/root/event" className="hover:text-blue-500 transition duration-300">Events</a>
         <a href="/root/verification" className="hover:text-blue-500 transition duration-300">Verification</a>
       </div>
+      <a
+        href="https://www.instagram.com/robixe.online/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hidden lg:flex space-x-2 text-black hover:text-blue-800 lg:ml-[22%] lg:mt-2"
+      >
+        <img src="/Robixe.png" alt="Robixe Logo" className="w-5 h-5" />
+        <span className="text-[12px] font-bold  ">Dev by Robixe</span>
+      </a>
+    {/* for small screens */}
+      <a
+     href="https://www.instagram.com/robixe.online/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="lg:hidden flex space-x-2 text-black hover:text-blue-800 absolute mt-[18%]  left-1/2 transform -translate-x-1/2"
+     >
+    <img src="/Robixe.png" alt="Robixe Logo" className="w-5 h-5" />
+    <span className="text-[12px] font-bold">Dev by Robixe</span>
+     </a>
  </nav>
-      <div className=" bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl mt-10 p-6 md:w-1/2 w-[90%] max-w-xl mx-auto mb-10">
+      <div className=" bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl lg:mt-10 mt-[16%] p-6 md:w-1/2 w-[90%] max-w-xl mx-auto mb-10">
         <h1 className="lg:text-2xl text-[22px] font-bold mb-6 text-center text-indigo-900 ">Code Verification Input for User Check</h1>
         <input
           type='text'

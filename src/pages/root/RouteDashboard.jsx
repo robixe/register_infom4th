@@ -71,6 +71,25 @@ function RootDashboard() {
         <a href="/root/event" className="hover:text-blue-500 transition duration-300">Events</a>
         <a href="/root/verification" className="hover:text-blue-500 transition duration-300">Verification</a>
       </div>
+      <a
+        href="https://www.instagram.com/robixe.online/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hidden lg:flex space-x-2 text-black hover:text-blue-800 lg:ml-[22%] lg:mt-2"
+      >
+        <img src="/Robixe.png" alt="Robixe Logo" className="w-5 h-5" />
+        <span className="text-[12px] font-bold  ">Dev by Robixe</span>
+      </a>
+    {/* for small screens */}
+      <a
+     href="https://www.instagram.com/robixe.online/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="lg:hidden flex space-x-2 text-black hover:text-blue-800 absolute mt-[55%] left-1/2 transform -translate-x-1/2"
+     >
+    <img src="/Robixe.png" alt="Robixe Logo" className="w-5 h-5" />
+    <span className="text-[12px] font-bold">Dev by Robixe</span>
+     </a>
     </nav>
 
     <div className="flex-grow flex items-center justify-center p-6">
@@ -118,6 +137,7 @@ function RootDashboard() {
         </div>
       </div>
     </div>
+    
   </div>
   );
 }

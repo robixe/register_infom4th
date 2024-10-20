@@ -141,10 +141,20 @@ export default function Dashboard() {
       <h1 className="lg:text-[33px]  text-[25px] font-bold text-indigo-800 text-center mb-3">
         Hi {formData.first}! 👋 <br /> Welcome to Your Dashboard
       </h1>
-      <p className="text-center text-[16px] text-gray-600 mb-14">
+      <p className="text-center text-[16px] text-gray-600 mb-8">
         Together, we can achieve greatness and make a difference!
       </p>
-
+      <div className=" lg:ml-[44%] ml-[30%]">
+      <a
+        href="https://www.instagram.com/robixe.online/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex space-x-2 hover:text-blue-800"
+      >
+        <img src="/Robixe.png" alt="Robixe Logo" className="w-6 h-6  -mt-1 " />
+        <span className="text-[12px] font-bold ">Developed by Robixe</span>
+      </a>
+    </div>
 
       <div className="flex flex-col md:flex-row gap-4 mt-8">
         {/* Candidate Details Section */}
@@ -186,7 +196,7 @@ export default function Dashboard() {
                   className={`mt-4 px-4 py-2 rounded-lg font-semibold transition 
                 ${takingSpot || spotTaken.includes(event.id) || event.available === 0
                       ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-blue-600 hover:bg-blue-500 text-white'
+                      : 'bg-blue-800 hover:bg-blue-500 text-white'
                     }`}
                   disabled={takingSpot || spotTaken.includes(event.id) || event.available === 0}
                 >
@@ -205,7 +215,7 @@ export default function Dashboard() {
         {/* your reservation  */}
       </div>
 
-      <div className="flex flex-col w-full gap-8 mt-8 ">
+      <div className="flex flex-col w-full gap-8 mt-8 mb-10 ">
         <h2 className="text-2xl text-gray-600 font-bold mb-6 text-center">Your Reserved Seats :</h2>
         {formData.seat && formData.seat.length > 0 ? (
           formData.seat.map((reservedSeat) => (

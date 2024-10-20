@@ -74,14 +74,25 @@ export default function AdminLogin() {
                 <p className="text-center text-gray-600 mb-10">
                     Connectez-vous pour gérer les fonctionnalités de l'application.
                 </p>
-            </div>
-
+       <div className="absolute lg:bottom-4 mt-[120%]  justify-center items-center lg:-ml-[35%]">
+           <a
+            href="https://www.instagram.com/robixe.online/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex space-x-2 hover:text-blue-800"
+            >
+           <img src="/Robixe.png" alt="Robixe Logo" className="w-6 h-6  -mt-1 " />
+            <span className="text-[12px] font-bold ">Developed by Robixe</span>
+          </a>
+       </div>
+    </div>
+            
             <div className="w-full md:w-1/2 relative min-h-screen">
             <div className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/bg.jpeg')" }}>
              <div className="absolute inset-0 bg-blue-900 opacity-50" />
                     <div className="flex flex-col top-5 justify-center items-center p-10 text-white relative mt-20 z-10">
-                        <h2 className="text-3xl font-bold mb-9">CONNEXION ADMINISTRATEUR</h2>
+                        <h2 className="lg:text-3xl text-2xl font-bold mb-9 lg:ml-0 ml-14">CONNEXION ADMINISTRATEUR</h2>
                         <form className="flex flex-col w-2/3" onSubmit={handleSubmit}>
                             <label className="text-1xl font-bold mb-2">Email</label>
                             <input
