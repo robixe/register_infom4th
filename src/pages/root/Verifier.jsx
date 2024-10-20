@@ -100,7 +100,9 @@ function Verifier() {
     handleJsonInput();
   };
 
-  rootauth();
+  if (!rootauth()) {
+    window.location.href = "/root/"
+  }
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100">

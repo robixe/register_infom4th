@@ -4,9 +4,13 @@ import { rootauth } from '../../help';
 function RootDashboard() {
   const [searchTerm, setSearchTerm] = useState(''); // State for the search term
   const [students, setStudents] = useState([]); // State to hold student data
-  rootauth();
+  
 
   useEffect(() => {
+    if (!rootauth())
+    {
+      window.location.href = "/root/"
+    }
     const fetchStudents = async () => {
       const token = localStorage.getItem("token");
       try {
@@ -23,12 +27,13 @@ function RootDashboard() {
         }
 
         const data = await response.json();
+        console.log(data);
         const formattedData = data.map(user => ({
           id: user.id,
           name: user.first ? `${user.first} ${user.last}` : user.user,
           email: user.email,
           phone: user.phone || 'N/A',
-          membership: user.role, // Assuming role is used as membership
+          membership: user.pack || 'N/A', // Assuming role is used as membership
           birth: user.birth || 'N/A',
           gender: user.gender || 'N/A',
           study: user.study || 'N/A',
@@ -46,6 +51,7 @@ function RootDashboard() {
     // Check if data is already in local storage
     const storedData = localStorage.getItem('studentsData');
     if (storedData) {
+      fetchStudents();
       setStudents(JSON.parse(storedData));
     } else {
       fetchStudents();

@@ -7,7 +7,9 @@ export default function Form() {
   const navigate = useNavigate();
 
   // Define your role variable here or fetch it as needed
-    auth();
+  if (!auth()) { // Only call auth() and check if authenticated
+    window.location.href = "/"; // Redirect to login if not authenticated
+  }
     const info = localStorage.getItem("info");
     if (info)
     {

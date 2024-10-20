@@ -8,21 +8,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [events, setEvents] = useState([]); // Update to store an array of events
   const [takingSpot, setTakingSpot] = useState(false);
-  const [spotTaken, setSpotTaken] = useState(() => {
-    // Initialize from localStorage if available
-    const savedSpots = localStorage.getItem('spotTaken');
-    const timestamp = localStorage.getItem('spotTakenTimestamp');
-    const now = Date.now();
-
-    // Check if the saved spots are still valid (within 24 hours)
-    if (savedSpots && timestamp && (now - timestamp < 24 * 60 * 60 * 1000)) {
-      return JSON.parse(savedSpots); // Parse JSON or return empty array
-    } else {
-      localStorage.removeItem('spotTaken'); // Clear expired data
-      localStorage.removeItem('spotTakenTimestamp');
-      return []; // Return empty array if expired
-    }
-  });
+  const [spotTaken, setSpotTaken] = useState({});
 
   useEffect(() => {
     if (!auth()) { // Only call auth() and check if authenticated

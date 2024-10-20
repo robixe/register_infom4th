@@ -11,6 +11,7 @@ import AdminLogin from './pages/root/AdminLogin';
 import Verifier from './pages/root/Verifier';
 import RouteDashboard from './pages/root/RouteDashboard';
 import EventForm from './pages/root/Event';
+import NotFound from './pages/notfound';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +29,7 @@ function App() {
         <Route path='/root/verification' element={<Verifier/>} />
         <Route path='/root/dashboard' element={<RouteDashboard/>} />
         <Route path='/root/event' element={<EventForm  />} />
+        <Route path='*' element={<NotFound  />} />
       </Routes>
     </Router>
   )

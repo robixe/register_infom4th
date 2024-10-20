@@ -43,7 +43,7 @@ export default function Register() {
         window.location.href = '/'; 
       } else {
         // Handle non-successful responses
-        const errorData = await response.json();
+        const errorData = await response;
         console.error('Error data:', errorData);
         setError('Registration failed: ' + (errorData.message || 'Unknown error'));
       }

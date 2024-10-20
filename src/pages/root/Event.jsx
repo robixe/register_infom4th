@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { rootauth } from '../../help';
 
 const EventForm = () => {
     const [eventName, setEventName] = useState('');
@@ -7,7 +8,9 @@ const EventForm = () => {
     const [end, setEnd] = useState('');
     const [events, setEvents] = useState([]); // State to hold the list of events
     const [loading, setLoading] = useState(true); // State to manage loading status
-
+    if (!rootauth()) {
+        window.location.href = "/root/"
+    }
     const fetchEvents = async () => {
         try {
             const token = localStorage.getItem('Token'); // Retrieve token from local storage
@@ -46,7 +49,7 @@ const EventForm = () => {
             start,
             end,
         };
-        console.log(eventData); 
+        console.log(eventData);
         try {
             const response = await fetch('https://infom4th-api.robixe.online/events/add', {
                 method: 'POST',
@@ -83,12 +86,12 @@ const EventForm = () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ id: eventId , token : token })
+                    body: JSON.stringify({ id: eventId, token: token })
                 });
                 if (response.ok) {
                     const jsonResponse = await response;
                     console.log('Event deleted successfully:', jsonResponse);
-                    
+
                     alert('Event deleted successfully!');
                     // Optionally, fetch events again to update the list
                     fetchEvents();
