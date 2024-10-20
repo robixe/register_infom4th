@@ -127,7 +127,7 @@ export default function Register() {
       <input required type="checkbox" className="mr-2"/>
       <label  className="text-[12px]">
         J'ai lu, compris et accepté les{" "}
-        <a className="text-blue-400 underline hover:no-underline hover:cursor-pointer" >
+        <a href='/terms' className="text-blue-400 underline hover:no-underline hover:cursor-pointer" >
           politiques et conditions
         </a>{" "}
         de la plateforme.

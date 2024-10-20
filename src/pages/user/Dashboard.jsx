@@ -29,7 +29,7 @@ export default function Dashboard() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(JSON.stringify(data.first));
+        console.log((data));
         if (
           JSON.stringify(data.id) == "null" ||
           JSON.stringify(data.auth) == "null" ||
