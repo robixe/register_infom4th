@@ -73,10 +73,9 @@ export default function AdminLogin() {
             </div>
 
             <div className="w-full md:w-1/2 relative min-h-screen">
-                <div
-                    className="absolute inset-0 bg-cover bg-center bg-blue-900"
-                >
-                    <div className="absolute inset-0 bg-blue-900 opacity-50" />
+            <div className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url('/bg.jpeg')" }}>
+             <div className="absolute inset-0 bg-blue-900 opacity-50" />
                     <div className="flex flex-col top-5 justify-center items-center p-10 text-white relative mt-20 z-10">
                         <h2 className="text-3xl font-bold mb-9">CONNEXION ADMINISTRATEUR</h2>
                         <form className="flex flex-col w-2/3" onSubmit={handleSubmit}>

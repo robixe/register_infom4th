@@ -92,9 +92,9 @@ export default function Login() {
           style={{ backgroundImage: "url('/bg.jpeg')" }}
         >
           <div className="absolute inset-0 bg-blue-900 opacity-50" />
-          <div className="flex flex-col top-5 justify-center items-center p-10 text-white relative mt-20 z-10 ">
+          <div className="flex flex-col top-5 justify-center items-center p-10 text-white relative lg:mt-20 mt-[40%] z-10 ">
             <h2 className="text-3xl font-bold mb-9 ">CONNEXION</h2>
-            <form className="flex flex-col w-2/3" onSubmit={handleSubmit}>
+            <form className="flex flex-col lg:w-2/3" onSubmit={handleSubmit}>
               <label className="text-1xl font-bold mb-2">Email</label>
               <input
                 id="email"
@@ -102,7 +102,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 type="email"
-                className="p-2 mb-5 text-black rounded-md"
+                className="p-2  mb-5 text-black rounded-md"
               />
               <label className="text-1xl font-bold mb-2">Mot de passe</label>
               <input
@@ -124,7 +124,7 @@ export default function Login() {
                 </Link>
               </div>
             </form>
-            <div className="mt-6 text-[12px] lg:-ml-[22%] ml-[10%]">
+            <div className="mt-6 text-[12px] lg:-ml-[22%] ml-[3%]">
               <a href="/password" className="underline hover:no-underline mb-1 block">Mot de passe oublié ?</a>
               <a href="/root/" className="underline hover:no-underline mb-1 block">Se connecter en Admin</a>
               <a href="#" className="underline hover:no-underline mb-1 block">

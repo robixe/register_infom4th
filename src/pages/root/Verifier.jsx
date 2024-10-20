@@ -102,35 +102,37 @@ function Verifier() {
   }
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100">
-      <nav className="w-full bg-blue-600 p-4 text-white flex justify-between items-center">
-        <div className="text-lg font-bold">Dashboard</div>
-        <div className="flex space-x-4">
-          <a href="/root/dashboard" className="hover:text-blue-200">Students</a>
-          <a href="/root/event" className="hover:text-blue-200">Events</a>
-          <a href="/root/verification" className="hover:text-blue-200">Verification</a>
-        </div>
-      </nav>
-      <div className="bg-white mt-8 p-6 rounded-lg shadow-md w-full max-w-lg">
-        <h1 className="text-2xl font-bold mb-4">Code Verification Input for User Check</h1>
+    <div className="flex flex-col min-h-screen items-center w-full bg-gradient-to-r from-gray-300 via-blue-200 to-gray-300 ">
+    <nav className="w-full bg-white/30 backdrop-blur-md p-4 text-indigo-800 shadow-lg flex ">
+    <div className="lg:text-2xl text-[20px] font-bold lg:ml-16">Dashboard</div>
+      <div className="flex lg:space-x-14 space-x-4 lg:ml-[25%] ml-[13%] mt-1 lg:text-[17px]  text-[15px] font-[500]">
+        <a href="/root/dashboard" className="hover:text-blue-500 transition duration-300">Students</a>
+        <a href="/root/event" className="hover:text-blue-500 transition duration-300">Events</a>
+        <a href="/root/verification" className="hover:text-blue-500 transition duration-300">Verification</a>
+      </div>
+ </nav>
+      <div className=" bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl mt-10 p-6 md:w-1/2 w-[90%] max-w-xl mx-auto mb-10">
+        <h1 className="lg:text-2xl text-[22px] font-bold mb-6 text-center text-indigo-900 ">Code Verification Input for User Check</h1>
         <input
           type='text'
           placeholder='Code de verification'
           value={jsonInput}
           onChange={(e) => setJsonInput(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+          className="w-full p-2 border border-gray-300 rounded-md mb-6 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        /> 
+        <div className='text-center'>
         <button
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
+          className="w-[40%] py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-blue-700"
           onClick={handleJsonInput}
           disabled={loading} // Disable button while loading
         >
           {loading ? 'Checking...' : 'Check User'}
         </button>
+        </div>
         {userStatus && <p className="mt-4">User Status: {userStatus}</p>}
         {userData && (
-          <div className="mt-4">
-            <h2 className="text-lg font-bold">User Information:</h2>
+          <div className="mt-10">
+            <h2 className="text-lg font-bold mb-5">User Information:</h2>
             <p><strong>Name:</strong> {userData.first} {userData.last}</p>
             <p><strong>Email:</strong> {userData.email}</p>
             <p><strong>Phone:</strong> {userData.phone}</p>
@@ -145,26 +147,27 @@ function Verifier() {
         {userData && (
           <div className="mt-4">
             <button
-              className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200"
+              className="w-full bg-green-500  py-2 text-white font-semibold rounded-md hover:bg-green-600 transition duration-200"
               onClick={() => updatePaymentStatus(true)} // Mark as paid
             >
               Mark as Paid
             </button>
             <button
-              className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition duration-200 mt-2"
+              className="w-full bg-red-500 text-white py-2 font-semibold rounded-md hover:bg-red-600 transition duration-200 mt-2"
               onClick={() => updatePaymentStatus(false)} // Mark as unpaid
             >
               Mark as Unpaid
             </button>
+          
             <select
-              className="w-full p-2 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded-md mb-4 mt-6 focus:outline-none focus:ring-1 focus:ring-blue-500"
               onChange={(e) => setMembershipType(e.target.value)}
             >
               <option value="begin">Pack Begin</option>
               <option value="vip">Pack Pro</option>
             </select>
             <button
-              className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200"
+              className="w-full bg-green-500 text-white py-2 font-semibold rounded-md hover:bg-green-600 transition duration-200"
               onClick={updateMembershipStatus} // Update membership status
             >
               Update Membership Status

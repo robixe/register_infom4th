@@ -8,7 +8,6 @@ export default function Form() {
 
   // Define your role variable here or fetch it as needed
   if (!auth()) { // Only call auth() and check if authenticated
-    
   }
     const info = localStorage.getItem("info");
     if (info)
@@ -93,131 +92,138 @@ export default function Form() {
   };
 
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-4xl font-bold text-blue-800 text-center mb-3">Candidate Information</h1>
-      <p className="text-center text-[18px] font-bold text-gray-600 mb-2">
-        Tell us a little more about yourself
-      </p>
-      <p className="text-center text-[15px] text-gray-600 mb-10">
-        To complete your registration, please fill out the form below with accurate details. Double check all information for accuracy before submitting.
-      </p>
-      <form className="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <label className="text-[14px] text-gray-700">First Name</label>
-            <input
-              type="text"
-              name="first"
-              value={formData.first}
-              onChange={handleChange}
-              className="border rounded w-full py-2 px-3"
-            />
-            {errors.first && <p className="text-red-500 text-sm">{errors.first}</p>}
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-300 via-blue-100 to-gray-300 p-10">
+    <div className="container max-w-5xl mx-auto p-10 bg-white/80 backdrop-blur-lg shadow-2xl rounded-xl -mt-1">
+    <h1 className="lg:text-[34px] text-[30px] font-bold text-blue-800 text-center mb-2 -mt-4">Candidate Information</h1>
+    <p className="text-center text-lg font-semibold text-gray-700 mb-2">
+      Tell us a little more about yourself
+    </p>
+    <p className="text-center text-sm text-gray-600 mb-10">
+      To complete your registration, please fill out the form below with accurate details. Double-check all information for accuracy before submitting.
+    </p>
 
-          <div>
-            <label className="text-[14px] text-gray-700">Last Name</label>
-            <input
-              type="text"
-              name="last"
-              value={formData.last}
-              onChange={handleChange}
-              className="border rounded w-full py-2 px-3"
-            />
-            {errors.last && <p className="text-red-500 text-sm">{errors.last}</p>}
-          </div>
-
-          <div>
-            <label className="text-[14px] text-gray-700">Birth Date</label>
-            <input
-              type="date"
-              name="birth"
-              value={formData.birth}
-              onChange={handleChange}
-              className="border rounded w-full py-2 px-3"
-            />
-            {errors.birth && <p className="text-red-500 text-sm">{errors.birth}</p>}
-          </div>
-
-          <div>
-            <label className="text-[14px] text-gray-700">Gender</label>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              className="border rounded w-full py-2 px-3"
-            >
-              <option value="">Select Gender</option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="text-[14px] text-gray-700">Phone Number</label>
-            <input
-              type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="border rounded w-full py-2 px-3"
-            />
-            {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
-          </div>
-          <div>
-            <label className="text-[14px] text-gray-700">Field of Study</label>
-            <select
-              name="study"
-              value={formData.study}
-              onChange={handleChange}
-              className="border rounded text-[14px] w-full py-2 px-3 mb-10"
-            >
-              <option value="">Select Field</option>
-              <option value="Computer Science">Computer Science</option>
-              <option value="Mathematics">Mathematics</option>
-              <option value="Physics">Physics</option>
-              <option value="Chemistry">Chemistry</option>
-              <option value="Biology">Biology</option>
-              <option value="Geology">Geology</option>
-              <option value="Environmental Science">Environmental Science</option>
-            </select>
-          </div>
-        </div>
-        
-        <div className="space-y-2">
-          <h3 className="font-bold">As a candidate, I agree to the following terms:</h3>
-          <label className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              name="over18"
-              checked={formData.over18}
-              onChange={handleChange}
-              required
-            />
-            <span>I confirm that I am 18 years old or older.</span>
-          </label>
-          <label className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              name="acceptTerms"
-              checked={formData.acceptTerms}
-              onChange={handleChange}
-              required
-            />
-            <span>I accept all terms and conditions.</span>
-          </label>
-          {errors.acceptTerms && <p className="text-red-500 text-sm">{errors.acceptTerms}</p>}
+    <form className="grid gap-6" onSubmit={handleSubmit}>
+      <div className="grid grid-cols-2 gap-3">
+        <div>
+          <label className="text-sm font-medium text-gray-800">First Name</label>
+          <input
+            type="text"
+            name="first"
+            value={formData.first}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg w-full py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-600"
+          />
+          {errors.first && <p className="text-red-500 text-sm">{errors.first}</p>}
         </div>
 
-        <div className="mt-6">
-          <button
-            type="submit"
-            className="bg-blue-800 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded"
+        <div>
+          <label className="text-sm font-medium text-gray-800">Last Name</label>
+          <input
+            type="text"
+            name="last"
+            value={formData.last}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg w-full py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+          {errors.last && <p className="text-red-500 text-sm">{errors.last}</p>}
+        </div>
+
+        <div>
+          <label className="text-sm font-medium text-gray-800">Birth Date</label>
+          <input
+            type="date"
+            name="birth"
+            value={formData.birth}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg w-full py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+          {errors.birth && <p className="text-red-500 text-sm">{errors.birth}</p>}
+        </div>
+
+        <div>
+          <label className="text-sm font-medium text-gray-800">Gender</label>
+          <select
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg w-full py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-500"
           >
-            Confirm
-          </button>
+            <option value="">Select Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
         </div>
-      </form>
-    </div>
+
+        <div>
+          <label className="text-sm font-medium text-gray-800">Phone Number</label>
+          <input
+            type="text"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg w-full py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+          {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
+        </div>
+
+        <div>
+          <label className="text-sm font-medium text-gray-800">Field of Study</label>
+          <select
+            name="study"
+            value={formData.study}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg w-full py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <option value="">Select Field</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Biology">Biology</option>
+            <option value="Geology">Geology</option>
+            <option value="Environmental Science">Environmental Science</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <h3 className="font-semibold text-[16px]">As a candidate, I agree to the following terms:</h3>
+        <label className="flex items-center space-x-3">
+          <input
+            type="checkbox"
+            name="over18"
+            checked={formData.over18}
+            onChange={handleChange}
+            required
+            className="h-4 w-4 text-blue-500 border-gray-300 focus:ring-blue-500"
+          />
+          <span className="text-sm">I confirm that I am 18 years old or older.</span>
+        </label>
+
+        <label className="flex items-center space-x-3">
+          <input
+            type="checkbox"
+            name="acceptTerms"
+            checked={formData.acceptTerms}
+            onChange={handleChange}
+            required
+            className="h-4 w-4 text-blue-500 border-gray-300 focus:ring-blue-500"
+          />
+          <span className="text-sm">I accept all terms and conditions.</span>
+        </label>
+        {errors.acceptTerms && <p className="text-red-500 text-sm">{errors.acceptTerms}</p>}
+      </div>
+
+      <div className="-mb-3 text-center ">
+        <button
+          type="submit"
+          className=" lg:w-[15%] bg-blue-800  hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300"
+        >
+          Confirm
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
   );
 }

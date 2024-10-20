@@ -87,9 +87,9 @@ const EventForm = () => {
                     body: JSON.stringify({ id: eventId, token: token })
                 });
                 if (response.ok) {
-                    const jsonResponse = await response;
+                    const jsonResponse = await response.json();
 
-                    alert('Event deleted successfully!');
+                    alert('Event deleted successfully!', jsonResponse);
                     // Optionally, fetch events again to update the list
                     fetchEvents();
                 } else {
@@ -137,31 +137,28 @@ const EventForm = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gray-100 ">
-            {/* Navigation Bar */}
-            <nav className="w-full bg-blue-600 p-4 text-white flex justify-between items-center ">
-                <div className="text-lg font-bold">Dashboard</div>
-                <div className="flex space-x-4">
-                    <a href="/root/dashboard" className="hover:text-blue-200">Students</a>
-                    <a href="/root/event" className="hover:text-blue-200">Events</a>
-                    <a href="/root/verification" className="hover:text-blue-200">Verification</a>
-                </div>
-            </nav>
-
-            <div className='flex md:flex-row flex-col'>
-                {/* Form Section */}
-                <div className="bg-white mt-6 p-6 md:w-1/2 w-full rounded-lg shadow-md max-w-xl mx-auto">
-                    <h2 className="text-xl font-bold mb-4">Add New Event</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">
+        <div className="flex flex-col min-h-screen w-full bg-gradient-to-r from-gray-300 via-blue-200 to-gray-300 ">
+       <nav className="w-full bg-white/30 backdrop-blur-md p-4 text-indigo-800 shadow-lg flex ">
+       <div className="lg:text-2xl text-[20px] font-bold lg:ml-16">Dashboard</div>
+      <div className="flex lg:space-x-14 space-x-4 lg:ml-[25%] ml-[13%] mt-1 lg:text-[17px]  text-[15px] font-[500]">
+        <a href="/root/dashboard" className="hover:text-blue-500 transition duration-300">Students</a>
+        <a href="/root/event" className="hover:text-blue-500 transition duration-300">Events</a>
+        <a href="/root/verification" className="hover:text-blue-500 transition duration-300">Verification</a>
+      </div>
+    </nav>
+    <div className="flex  flex-col ">
+        <div className=" bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl mt-6 p-6 md:w-1/2 w-[90%] max-w-xl mx-auto">
+            <h2 className="text-2xl font-bold mb-4 text-center text-indigo-800">Add New Event</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700">
                                 Event Name:
                                 <input
                                     type="text"
                                     value={eventName}
                                     onChange={(e) => setEventName(e.target.value)}
                                     required
-                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                                 />
                             </label>
                         </div>
@@ -172,7 +169,7 @@ const EventForm = () => {
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     required
-                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                                 />
                             </label>
                         </div>
@@ -184,7 +181,7 @@ const EventForm = () => {
                                     value={start}
                                     onChange={(e) => setStart(e.target.value)}
                                     required
-                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                                 />
                             </label>
                         </div>
@@ -196,30 +193,32 @@ const EventForm = () => {
                                     value={end}
                                     onChange={(e) => setEnd(e.target.value)}
                                     required
-                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                                 />
                             </label>
                         </div>
+                        <div className='text-center'>
                         <button
                             type="submit"
-                            className="w-full py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+                            className="w-[40%] py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-blue-700"
                         >
                             Add Event
                         </button>
+                        </div>
                     </form>
                 </div>
 
                 {/* Events List Section */}
-                <div className="bg-white mt-6 p-6 md:w-1/2 w-full rounded-lg shadow-md max-w-xl mx-auto">
-                    <h2 className="text-xl font-bold mb-4">Existing Events</h2>
+                <div className="bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl mt-6 p-6 md:w-1/2 w-[90%] max-w-xl mx-auto mb-10">
+                    <h2 className="text-2xl font-bold mb-10 text-center text-indigo-800">Existing Events</h2>
                     {loading ? (
                         <p>Loading events...</p>
                     ) : (
                         <ul>
                             {events.length > 0 ? (
                                 events.map((event) => (
-                                    <li key={event.id} className="border-b py-2">
-                                        <h3 className="font-semibold">{event.name}</h3>
+                                    <li key={event.id} className="border-b-2 border-gray-300 py-2">
+                                        <h3 className="font-bold text-1xl">{event.name}</h3>
                                         <p>{event.description}</p>
                                         <p><strong>Start:</strong> {event.start}</p>
                                         <p><strong>End:</strong> {event.end}</p>
@@ -227,13 +226,13 @@ const EventForm = () => {
                                         <p><strong>Available:</strong> {event.available}</p>
                                         <button
                                             onClick={() => addSpot(event.id)} // Add spot button
-                                            className="mt-2 bg-green-500 text-white py-1 px-3 rounded-md hover:bg-green-600"
+                                            className="text-sm mt-3 bg-green-500 text-white py-1 px-3 text-white font-semibold rounded-md hover:bg-green-600"
                                         >
                                             Add Spots
                                         </button>
                                         <button
                                             onClick={() => deleteEvent(event.id)} // Delete event button
-                                            className="mt-2 bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 ml-2"
+                                            className=" text-sm mt-3 bg-red-500 text-white py-1 px-3 text-white font-semibold rounded-md hover:bg-red-600 ml-2"
                                         >
                                             Delete Event
                                         </button>

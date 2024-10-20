@@ -63,59 +63,52 @@ function RootDashboard() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-gray-100">
-      <nav className="w-full bg-blue-600 p-4 text-white flex justify-between items-center">
-        <div className="text-lg font-bold w-full">Dashboard</div>
-        <div className="flex space-x-4">
-          <a href="/root/dashboard" className="hover:text-blue-200">Students</a>
-          <a href="/root/event" className="hover:text-blue-200">Events</a>
-          <a href="/root/verification" className="hover:text-blue-200">Verification</a>
-        </div>
-      </nav>
-      <div className="bg-white p-6 rounded-lg shadow-md w-full mt-4">
-        <h1 className="text-2xl font-bold mb-4">Student Dashboard</h1>
+    <div className="flex flex-col min-h-screen w-full bg-gradient-to-r from-gray-300 via-blue-200 to-gray-300 ">
+    <nav className="w-full bg-white/30 backdrop-blur-md p-4 text-indigo-800 shadow-lg flex ">
+      <div className="lg:text-2xl text-[20px] font-bold lg:ml-16">Dashboard</div>
+      <div className="flex lg:space-x-14 space-x-4 lg:ml-[25%] ml-[13%] mt-1 lg:text-[17px]  text-[15px] font-[500]">
+        <a href="/root/dashboard" className="hover:text-blue-500 transition duration-300">Students</a>
+        <a href="/root/event" className="hover:text-blue-500 transition duration-300">Events</a>
+        <a href="/root/verification" className="hover:text-blue-500 transition duration-300">Verification</a>
+      </div>
+    </nav>
 
-        {/* Search Bar */}
+    <div className="flex-grow flex items-center justify-center p-6">
+      <div className="bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl w-full max-w-7xl p-9">
+        <h1 className="lg:text-[28px] text-[25px] font-bold mb-6 text-indigo-800">Student Dashboard</h1>
+  
         <input
           type="text"
-          placeholder="Search by name..."
+          placeholder=" Search by name..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 mb-6 rounded-xl border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-400 transition"
         />
-
-        {/* Responsive Table Container */}
-        <div className="overflow-x-auto w-full">
-          <table className="w-full border-collapse border border-gray-300">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
             <thead>
-              <tr className="bg-gray-200">
-                <th className="border border-gray-300 p-2 text-left">ID</th>
-                <th className="border border-gray-300 p-2 text-left">Name</th>
-                <th className="border border-gray-300 p-2 text-left">Email</th>
-                <th className="border border-gray-300 p-2 text-left">Phone</th>
-                <th className="border border-gray-300 p-2 text-left">Membership</th>
-                <th className="border border-gray-300 p-2 text-left">Birth</th>
-                <th className="border border-gray-300 p-2 text-left">Gender</th>
-                <th className="border border-gray-300 p-2 text-left">Study</th>
+              <tr className=" bg-gradient-to-r from-indigo-500 to-blue-500 text-white ">
+                {['ID', 'Name', 'Email', 'Phone', 'Membership', 'Birth', 'Gender', 'Study','Reserved Seats'].map((heading) => (
+                  <th key={heading} className="lg:p-3 text-[15px] font-semibold border border-indigo-300">
+                    {heading}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
               {filteredStudents.length > 0 ? (
                 filteredStudents.map((student) => (
-                  <tr key={student.id} className="hover:bg-gray-100">
-                    <td className="border border-gray-300 p-2">{student.id}</td>
-                    <td className="border border-gray-300 p-2">{student.name}</td>
-                    <td className="border border-gray-300 p-2">{student.email}</td>
-                    <td className="border border-gray-300 p-2">{student.phone}</td>
-                    <td className="border border-gray-300 p-2">{student.membership}</td>
-                    <td className="border border-gray-300 p-2">{student.birth}</td>
-                    <td className="border border-gray-300 p-2">{student.gender}</td>
-                    <td className="border border-gray-300 p-2">{student.study}</td>
+                  <tr key={student.id} className="hover:bg-indigo-100 transition">
+                    {Object.values(student).map((value, idx) => (
+                      <td key={idx} className="lg:p-4 p-3 lg:text-[16px] text-[15px]  border border-indigo-300 text-gray-700">
+                        {value}
+                      </td>
+                    ))}
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="8" className="border border-gray-300 p-2 text-center">
+                  <td colSpan="8" className="p-6 text-center text-gray-500">
                     No students found
                   </td>
                 </tr>
@@ -125,6 +118,7 @@ function RootDashboard() {
         </div>
       </div>
     </div>
+  </div>
   );
 }
 

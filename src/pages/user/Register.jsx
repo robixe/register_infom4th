@@ -73,9 +73,9 @@ export default function Register() {
     style={{ backgroundImage: "url('/bg.jpeg')" }}
     >
     <div className="absolute inset-0 bg-blue-900 opacity-60" /> 
-    <div className="flex flex-col justify-center items-center p-10 text-white relative -mt-3 z-10 ">
+    <div className="flex flex-col justify-center items-center p-10 text-white relative lg:mt-2 mt-40 z-10 ">
       <h2 className="text-3xl font-bold mb-9 ">INSCRIPTION</h2>
-      <form className="flex flex-col w-2/3 " onSubmit={handleSubmit}>
+      <form className="flex flex-col lg:w-2/3 w-[80%]  " onSubmit={handleSubmit}>
       <label className="text-[13px] font-bold mb-2" >Name</label>
         <input
           id="user"
