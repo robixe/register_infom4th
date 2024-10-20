@@ -104,8 +104,8 @@ export default function Form() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-300 via-blue-100 to-gray-300 p-10">
-      <div className="-mt-4 lg:ml-[44%] ml-[28%] mb-5">
+    <div className="min-h-screen bg-gradient-to-br from-gray-300 via-blue-100 to-gray-300 p-4">
+      <div className="mt-6 lg:ml-[44%] ml-[26%] mb-5">
       <a
         href="https://www.instagram.com/robixe.online/"
         target="_blank"
@@ -125,8 +125,8 @@ export default function Form() {
       To complete your registration, please fill out the form below with accurate details. Double-check all information for accuracy before submitting.
     </p>
 
-    <form className="grid gap-6" onSubmit={handleSubmit}>
-      <div className="grid grid-cols-2 gap-3">
+    <form className="grid gap-6 w-full" onSubmit={handleSubmit}>
+      <div className="grid md:grid-cols-2 gap-3">
         <div>
           <label className="text-sm font-medium text-gray-800">First Name</label>
           <input
