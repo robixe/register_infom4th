@@ -57,7 +57,8 @@ function Verifier() {
       });
 
       if (response.ok) {
-        const jsonResponse = await response.json();
+        const jsonResponse = await response;
+        console.log(jsonResponse);
         alert('Membership status updated successfully!');
         // Optionally, you can refresh user data or update UI here
       } else {
@@ -65,7 +66,6 @@ function Verifier() {
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred while updating membership status.');
     }
     handleJsonInput();
   };
@@ -92,9 +92,9 @@ function Verifier() {
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred while updating payment status.');
     }
     handleJsonInput();
+    
   };
 
   if (!rootauth()) {
@@ -140,7 +140,7 @@ function Verifier() {
             <p><strong>Birth Date:</strong> {userData.birth}</p>
             <p><strong>Study:</strong> {userData.study}</p>
             <p><strong>Pack:</strong> {userData.pack}</p>
-            <p><strong>Payment:</strong> {userData.payment === "0" ? 'Not Paid' : 'Paid'}</p>
+            <p><strong>Payment:</strong> {(userData.payment === "0" ||userData.payment === null ) ? 'Not Paid' : 'Paid'}</p>
             <p><strong>Seats:</strong> {userData.seat ? userData.seat.map(seat => seat.name).join(', ') : 'No seats reserved'}</p>
           </div>
         )}
@@ -163,6 +163,7 @@ function Verifier() {
               className="w-full p-2 border border-gray-300 rounded-md mb-4 mt-6 focus:outline-none focus:ring-1 focus:ring-blue-500"
               onChange={(e) => setMembershipType(e.target.value)}
             >
+               <option >Choose Pack</option>
               <option value="begin">Pack Begin</option>
               <option value="vip">Pack Pro</option>
             </select>

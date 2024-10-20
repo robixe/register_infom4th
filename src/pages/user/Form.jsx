@@ -9,9 +9,21 @@ export default function Form() {
   // Define your role variable here or fetch it as needed
   if (!auth()) { // Only call auth() and check if authenticated
   }
-    const info = localStorage.getItem("info");
-    if (info)
-    {
+    const info = JSON.parse(localStorage.getItem("info"));
+    console.log(info)
+    if (
+      info.id != null &&
+      info.auth != null &&
+      info.user != null &&
+      info.email != null &&
+      info.role != null &&
+      info.first != null &&
+      info.last != null &&
+      info.gender != null &&
+      info.birth != null &&
+      info.phone != null &&
+      info.study != null
+    ) {
       window.location.href= "/dashboard" ;
     }
   const [formData, setFormData] = useState({

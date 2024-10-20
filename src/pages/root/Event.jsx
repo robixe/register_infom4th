@@ -13,7 +13,7 @@ const EventForm = () => {
     }
     const fetchEvents = async () => {
         try {
-            const token = localStorage.getItem('Token'); // Retrieve token from local storage
+            const token = localStorage.getItem('token'); // Retrieve token from local storage
             const body = JSON.stringify({ token }); // Prepare the body with the token
 
             const response = await fetch('https://infom4th-api.robixe.online/info/events', {
@@ -38,7 +38,6 @@ const EventForm = () => {
             setLoading(false); // Reset loading state
         }
     };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -62,17 +61,19 @@ const EventForm = () => {
                 
                 // Optionally, fetch events again to update the list
                 fetchEvents();
-                // Reset form fields
-                setEventName('');
-                setDescription('');
-                setStart('');
-                setEnd('');
             } else {
                 console.error('Error adding event:', response.statusText);
             }
         } catch (error) {
             console.error('Error:', error);
+        } finally {
+            // Clean the inputs after handling
+            setEventName('');
+            setDescription('');
+            setStart('');
+            setEnd('');
         }
+        fetchEvents();
     };
 
     const deleteEvent = async (eventId) => {
@@ -99,6 +100,7 @@ const EventForm = () => {
                 console.error('Error:', error);
             }
         }
+        fetchEvents();
     };
 
     const addSpot = async (eventId) => {

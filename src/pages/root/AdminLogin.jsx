@@ -27,11 +27,15 @@ export default function AdminLogin() {
                 if (response.ok) {
                     const data = await response.json();
 
-                    localStorage.setItem("Token", data.token);
+                    console.log(data)
+                    localStorage.setItem("token", data.token);
+
                     if (data.role == "root") {
                         localStorage.setItem("token", data.token);
                         localStorage.setItem("role", data.role);
                         window.location.href = '/root/dashboard';
+                    }else{
+                        window.location.href = '/';
                     }
                 } else {
                     handleResponseError(response);

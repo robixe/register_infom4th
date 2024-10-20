@@ -29,6 +29,23 @@ export default function Dashboard() {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(JSON.stringify(data.first));
+        if (
+          JSON.stringify(data.id) == "null" ||
+          JSON.stringify(data.auth) == "null" ||
+          JSON.stringify(data.user) == "null" ||
+          JSON.stringify(data.email) == "null" ||
+          JSON.stringify(data.role) == "null" ||
+          JSON.stringify(data.first) == "null" ||
+          JSON.stringify(data.last) == "null" ||
+          JSON.stringify(data.gender) == "null" ||
+          JSON.stringify(data.birth) == "null" ||
+          JSON.stringify(data.phone) == "null" ||
+          JSON.stringify(data.study) == "null"
+        ) {
+
+          window.location.href = "/form";
+        }
         localStorage.setItem("info", JSON.stringify(data));
         setFormData(data);
         // Check reserved spots and set them in state
@@ -121,89 +138,90 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-200 via-white to-gray-400 backdrop-blur-md p-8">
-    <h1 className="lg:text-[33px]  text-[25px] font-bold text-indigo-800 text-center mb-3">
-      Hi {formData.first}! 👋 <br/> Welcome to Your Dashboard
-    </h1>
-    <p className="text-center text-[16px] text-gray-600 mb-14">
-      Together, we can achieve greatness and make a difference!
-    </p>
-  
-    <h2 className="text-2xl text-gray-600 font-bold mb-6 text-center">Your Reserved Seats :</h2>
-    <div className="flex flex-wrap gap-8 mt-8 ">
-    {formData.seat && formData.seat.length > 0 ? (
-      formData.seat.map((reservedSeat) => (
-        <div
-          key={reservedSeat.event}
-          className=" bg-white/80 backdrop-blur-lg shadow-2xl rounded-xl p-6 w-80"
-        >
-          <p className="mb-2"><strong>Event Name:</strong> {reservedSeat.name}</p>
-          <p className="mb-2"><strong>Description:</strong> {reservedSeat.description}</p>
-          <p className="mb-2"><strong>Seat Number:</strong> {reservedSeat.seat}</p>
+      <h1 className="lg:text-[33px]  text-[25px] font-bold text-indigo-800 text-center mb-3">
+        Hi {formData.first}! 👋 <br /> Welcome to Your Dashboard
+      </h1>
+      <p className="text-center text-[16px] text-gray-600 mb-14">
+        Together, we can achieve greatness and make a difference!
+      </p>
+
+
+      <div className="flex flex-col md:flex-row gap-4 mt-8">
+        {/* Candidate Details Section */}
+        <div className="bg-white/90  md:w-1/2 w-full backdrop-blur-lg shadow-2xl rounded-xl p-8">
+          <h2 className="text-2xl text-gray-600 font-bold mb-6">Candidate Details:</h2>
+          <p className="mb-2"><strong>First Name:</strong> {formData.first}</p>
+          <p className="mb-2"><strong>Last Name:</strong> {formData.last}</p>
+          <p className="mb-2"><strong>Birth Date:</strong> {formData.birth}</p>
+          <p className="mb-2"><strong>Gender:</strong> {formData.gender}</p>
+          <p className="mb-2"><strong>Phone:</strong> {formData.phone}</p>
+          <p className="mb-2"><strong>Email:</strong> {formData.email}</p>
+          <p className="mb-2"><strong>Field of Study:</strong> {formData.study}</p>
+          <p className="mb-2"><strong>Verification:</strong> {formData.auth}</p>
+
+          <div className="mt-6">
+            <h3 className="text-xl text-gray-600 font-bold mb-4">
+              Scan this QR Code for your Information:
+            </h3>
+            <QRCodeCanvas value={qrData} size={156} className="mx-auto ml-4" />
+          </div>
         </div>
-      
-      ))
-    ) : (
-      <p className="text-center">You have not reserved any seats yet.</p>
-    )}  </div>
-  
-    <div className="flex flex-col md:flex-row gap-8 mt-8">
-      {/* Candidate Details Section */}
-      <div className="bg-white/90  md:w-1/2 w-full backdrop-blur-lg shadow-2xl rounded-xl p-8">
-        <h2 className="text-2xl text-gray-600 font-bold mb-6">Candidate Details:</h2>
-        <p className="mb-2"><strong>First Name:</strong> {formData.first}</p>
-        <p className="mb-2"><strong>Last Name:</strong> {formData.last}</p>
-        <p className="mb-2"><strong>Birth Date:</strong> {formData.birth}</p>
-        <p className="mb-2"><strong>Gender:</strong> {formData.gender}</p>
-        <p className="mb-2"><strong>Phone:</strong> {formData.phone}</p>
-        <p className="mb-2"><strong>Email:</strong> {formData.email}</p>
-        <p className="mb-2"><strong>Field of Study:</strong> {formData.study}</p>
-        <p className="mb-2"><strong>Verification:</strong> {formData.auth}</p>
-  
-        <div className="mt-6">
-          <h3 className="text-xl text-gray-600 font-bold mb-4">
-            Scan this QR Code for your Information:
-          </h3>
-          <QRCodeCanvas value={qrData} size={156} className="mx-auto ml-4" />
+
+        {/* Event Details Section */}
+        <div className="bg-white/90  backdrop-blur-lg shadow-2xl rounded-xl md:w-1/2 w-full  p-8">
+          <h2 className="text-2xl text-gray-600 font-bold mb-6">Event Details:</h2>
+          {events.length > 0 ? (
+            events.map((event) => (
+              <div key={event.id} className="mb-6">
+                <p className="mb-1"><strong>Name:</strong> {event.name}</p>
+                <p className="mb-1"><strong>Description:</strong> {event.description}</p>
+                <p className="mb-1"><strong>Start:</strong> {event.start}</p>
+                <p className="mb-1"><strong>End:</strong> {event.end}</p>
+                <p className="mb-1">
+                  <strong>Available Seats:</strong> {event.total - event.available} / {event.total}
+                </p>
+
+                <button
+                  onClick={() => handleTakeSpot(event.id)}
+                  className={`mt-4 px-4 py-2 rounded-lg font-semibold transition 
+                ${takingSpot || spotTaken.includes(event.id) || event.available === 0
+                      ? 'bg-gray-400 cursor-not-allowed'
+                      : 'bg-blue-600 hover:bg-blue-500 text-white'
+                    }`}
+                  disabled={takingSpot || spotTaken.includes(event.id) || event.available === 0}
+                >
+                  {spotTaken.includes(event.id)
+                    ? 'Spot Taken'
+                    : takingSpot
+                      ? 'Processing...'
+                      : 'Take Spot'}
+                </button>
+              </div>
+            ))
+          ) : (
+            <p>No events information available.</p>
+          )}
         </div>
+        {/* your reservation  */}
       </div>
-  
-      {/* Event Details Section */}
-      <div className="bg-white/90  backdrop-blur-lg shadow-2xl rounded-xl md:w-1/2 w-full  p-8">
-        <h2 className="text-2xl text-gray-600 font-bold mb-6">Event Details:</h2>
-        {events.length > 0 ? (
-          events.map((event) => (
-            <div key={event.id} className="mb-6">
-              <p className="mb-1"><strong>Name:</strong> {event.name}</p>
-              <p className="mb-1"><strong>Description:</strong> {event.description}</p>
-              <p className="mb-1"><strong>Start:</strong> {event.start}</p>
-              <p className="mb-1"><strong>End:</strong> {event.end}</p>
-              <p className="mb-1">
-                <strong>Available Seats:</strong> {event.total - event.available} / {event.total}
-              </p>
-  
-              <button
-                onClick={() => handleTakeSpot(event.id)}
-                className={`mt-4 px-4 py-2 rounded-lg font-semibold transition 
-                ${
-                  takingSpot || spotTaken.includes(event.id) || event.available === 0
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-blue-600 hover:bg-blue-500 text-white'
-                }`}
-                disabled={takingSpot || spotTaken.includes(event.id) || event.available === 0}
-              >
-                {spotTaken.includes(event.id)
-                  ? 'Spot Taken'
-                  : takingSpot
-                  ? 'Processing...'
-                  : 'Take Spot'}
-              </button>
+
+      <div className="flex flex-col w-full gap-8 mt-8 ">
+        <h2 className="text-2xl text-gray-600 font-bold mb-6 text-center">Your Reserved Seats :</h2>
+        {formData.seat && formData.seat.length > 0 ? (
+          formData.seat.map((reservedSeat) => (
+            <div
+              key={reservedSeat.event}
+              className=" bg-white/80 backdrop-blur-lg shadow-2xl rounded-xl p-6 w-80"
+            >
+              <p className="mb-2"><strong>Event Name:</strong> {reservedSeat.name}</p>
+              <p className="mb-2"><strong>Description:</strong> {reservedSeat.description}</p>
+              <p className="mb-2"><strong>Seat Number:</strong> {reservedSeat.seat}</p>
             </div>
+
           ))
         ) : (
-          <p>No events information available.</p>
-        )}
-      </div>
+          <p className="text-center">You have not reserved any seats yet.</p>
+        )}  </div>
     </div>
-  </div>
   );
 }
