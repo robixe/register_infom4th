@@ -137,7 +137,7 @@ export default function Dashboard() {
   const qrData = JSON.stringify(formData);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-200 via-white to-gray-400 backdrop-blur-md p-2">
+    <div className="min-h-screen bg-gradient-to-br from-gray-200 via-white to-gray-400 backdrop-blur-md p-3">
       <h1 className="lg:text-[33px]  text-[25px] font-bold text-indigo-800 text-center mb-3">
         Hi {formData.first}! 👋 <br /> Welcome to Your Dashboard
       </h1>
