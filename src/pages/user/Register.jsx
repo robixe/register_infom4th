@@ -65,28 +65,28 @@ export default function Register() {
       <button className="bg-black  font-bold text-white px-6 py-3 ">
         DÉPOSE TA CANDIDATURE
       </button> 
-      <div className="absolute lg:bottom-4 mt-[130%]  justify-center items-center lg:-ml-[35%]">
-      <a
-        href="https://www.instagram.com/robixe.online/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex space-x-2 hover:text-blue-800"
-      >
-        <img src="/Robixe.png" alt="Robixe Logo" className="w-6 h-6  -mt-1 " />
-        <span className="text-[12px] font-bold ">Developed by Robixe</span>
-      </a>
-    </div>
+      <div className="justify-center items-center mt-8">
+           <a
+            href="https://www.instagram.com/robixe.online/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex space-x-2 hover:text-blue-800"
+            >
+           <img src="/Robixe.png" alt="Robixe Logo" className="w-6 h-6  -mt-1 " />
+            <span className="text-[12px] font-bold ">Developed by Robixe</span>
+          </a>
+       </div>
     </div>
 
     <div className="w-full md:w-1/2 relative min-h-screen">
     <div
-    className="absolute inset-0 bg-cover bg-center"
+    className="absolute inset-0 bg-cover bg-center w-full"
     style={{ backgroundImage: "url('/bg.jpeg')" }}
     >
     <div className="absolute inset-0 bg-blue-900 opacity-60" /> 
     <div className="flex flex-col justify-center items-center p-10 text-white relative lg:mt-2 mt-[60px] z-10 ">
       <h2 className="text-3xl font-bold mb-9 ">INSCRIPTION</h2>
-      <form className="flex flex-col lg:w-2/3 w-[80%]  " onSubmit={handleSubmit}>
+      <form className="flex flex-col lg:w-2/3 w-[100%]  " onSubmit={handleSubmit}>
       <label className="text-[13px] font-bold mb-2" >Name</label>
         <input
           id="user"
