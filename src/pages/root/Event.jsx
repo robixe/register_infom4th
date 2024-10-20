@@ -142,7 +142,7 @@ const EventForm = () => {
         <div className="flex flex-col min-h-screen w-full bg-gradient-to-r from-gray-300 via-blue-200 to-gray-300 ">
        <nav className="w-full bg-white/30 backdrop-blur-md p-4 text-indigo-800 shadow-lg flex ">
        <div className="lg:text-2xl text-[20px] font-bold lg:ml-16">Dashboard</div>
-      <div className="flex lg:space-x-14 space-x-4 lg:ml-[25%] ml-[13%] mt-1 lg:text-[17px]  text-[15px] font-[500]">
+      <div className="flex lg:space-x-14 space-x-4 lg:ml-[25%] ml-[13%] mt-1 lg:text-[16px]  text-[14px] font-[500]">
         <a href="/root/dashboard" className="hover:text-blue-500 transition duration-300">Students</a>
         <a href="/root/event" className="hover:text-blue-500 transition duration-300">Events</a>
         <a href="/root/verification" className="hover:text-blue-500 transition duration-300">Verification</a>
