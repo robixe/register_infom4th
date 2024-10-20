@@ -15,7 +15,7 @@ export default function Dashboard() {
     const now = Date.now();
 
     // Check if the saved spots are still valid (within 24 hours)
-    if (savedSpots && timestamp && (now - timestamp < 24 * 60 * 60 * 1000)) {
+    if (savedSpots && timestamp && (now - timestamp < 5* 24 * 60 * 60 * 1000)) {
       return JSON.parse(savedSpots); // Parse JSON or return empty array
     } else {
       localStorage.removeItem('spotTaken'); // Clear expired data
