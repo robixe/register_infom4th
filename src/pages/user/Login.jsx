@@ -30,14 +30,14 @@ export default function Login() {
         if (response.status === 200) {
           const data = await response.json();
           
-          localStorage.setItem("Token", data.token);
+          localStorage.setItem("token", data.token);
           localStorage.setItem("role", data.role);
           localStorage.setItem("loginTimestamp", Date.now()); // Save current timestamp
 
           // Check authentication status
           
             if (data.role === "user") {
-              window.location.href = '/form';
+              window.location.href = '/dashboard';
             } else {
               window.location.href = '/root/';
             }

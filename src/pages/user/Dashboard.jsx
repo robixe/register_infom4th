@@ -6,37 +6,48 @@ import { auth } from '../../help';
 export default function Dashboard() {
   const [formData, setFormData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [events, setEvents] = useState([]); // Update to store an array of events
+  const [events, setEvents] = useState([]);
   const [takingSpot, setTakingSpot] = useState(false);
-  const [spotTaken, setSpotTaken] = useState(() => {
-    // Initialize from localStorage if available
-    const savedSpots = localStorage.getItem('spotTaken');
-    const timestamp = localStorage.getItem('spotTakenTimestamp');
-    const now = Date.now();
-
-    // Check if the saved spots are still valid (within 24 hours)
-    if (savedSpots && timestamp && (now - timestamp < 5* 24 * 60 * 60 * 1000)) {
-      return JSON.parse(savedSpots); // Parse JSON or return empty array
-    } else {
-      localStorage.removeItem('spotTaken'); // Clear expired data
-      localStorage.removeItem('spotTakenTimestamp');
-      return []; // Return empty array if expired
-    }
-  });
+  const [spotTaken, setSpotTaken] = useState([]);
 
   useEffect(() => {
-    if (!auth()) { // Only call auth() and check if authenticated
-      window.location.href = "/"; // Redirect to login if not authenticated
-    } else {
-      fetchUserInfo();
-      fetchEvents(); // Fetch events data
+    if (!auth()) {
+      window.location.href = "/";
+    }
+    fetchUserData();
+    fetchEvents();
+  }, []);
+
+  const fetchUserData = useCallback(async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await fetch('https://infom4th-api.robixe.online/info/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("info", JSON.stringify(data));
+        setFormData(data);
+        // Check reserved spots and set them in state
+        if (data.seat) {
+          setSpotTaken(data.seat.map(seat => seat.event)); // Store event IDs of reserved spots
+        }
+      } else {
+        console.error('Error fetching user data:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
-  // Fetch events data from API
   const fetchEvents = useCallback(async () => {
+    const token = localStorage.getItem('token');
     try {
-      const token = localStorage.getItem('Token');
       const response = await fetch('https://infom4th-api.robixe.online/seats/info', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -45,80 +56,37 @@ export default function Dashboard() {
 
       if (response.ok) {
         const data = await response.json();
-        setEvents(data); // Set the entire array of events
+        setEvents(data);
         localStorage.setItem('eventsData', JSON.stringify(data));
       } else {
         console.error(`Error fetching events: ${response.status}`);
       }
     } catch (error) {
       console.error('Error fetching events:', error);
-    } finally {
-      setLoading(false);
     }
   }, []);
 
-  // Fetch user information
-  const fetchUserInfo = useCallback(async () => {
-    try {
-      const token = localStorage.getItem('Token');
-      const response = await fetch('https://infom4th-api.robixe.online/info/all', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token }), // Send token in the request body
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      const currentUser = data.find(user => user.first === JSON.parse(localStorage.getItem('info')).first); // Assuming email is stored in localStorage
-      console.log(currentUser);
-
-      if (currentUser) {
-        localStorage.setItem('info', JSON.stringify(currentUser));
-        setFormData(currentUser);
-      } else {
-        console.error('User not found in the response data.');
-      }
-    } catch (error) {
-      console.error('Error fetching user information:', error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  // Handle taking a spot for a specific event
   const handleTakeSpot = async (eventId) => {
-    if (takingSpot || spotTaken.includes(eventId)) return; // Prevent taking if spot already taken
+    const token = localStorage.getItem('token');
     setTakingSpot(true);
 
-    // Prompt for the number of spots to add
-    const count = prompt("Enter the number of spots to add:");
-    if (!count || isNaN(count) || count <= 0) {
-      alert("Please enter a valid number of spots.");
+    // Check if the user is already taking a spot for the event
+    if (spotTaken.includes(eventId)) {
+      alert('You have already reserved a spot for this event.');
       setTakingSpot(false);
       return;
     }
 
     try {
-      const token = localStorage.getItem('Token');
       const response = await fetch('https://infom4th-api.robixe.online/seats/take', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, event: eventId, count: Number(count) }), // Include count in the request
+        body: JSON.stringify({ token, event: eventId }),
       });
 
       if (response.ok) {
         alert('Spot taken successfully!');
-        const data = await response.json();
-        console.log(data);
-        setSpotTaken(prev => {
-          const updatedSpots = [...prev, eventId]; // Add the taken eventId to the array
-          localStorage.setItem('spotTaken', JSON.stringify(updatedSpots)); // Save to localStorage
-          localStorage.setItem('spotTakenTimestamp', Date.now()); // Save current timestamp
-          return updatedSpots;
-        });
+        setSpotTaken(prev => [...prev, eventId]); // Update the reserved spots
         await fetchEvents(); // Refresh the events information
       } else {
         const errorText = await response.text();
@@ -133,12 +101,10 @@ export default function Dashboard() {
     }
   };
 
-  // Loading state
   if (loading) {
     return <p className="text-center">Loading...</p>;
   }
 
-  // Form data not available
   if (!formData) {
     return (
       <div className="container flex flex-col items-center justify-center p-8">
@@ -156,7 +122,7 @@ export default function Dashboard() {
   return (
     <div className="container mx-auto p-8 w-full">
       <h1 className="text-4xl font-bold text-blue-800 text-center mb-3">Hi {formData.first}! 👋 In Your Dashboard</h1>
-      <p className="text-center text-lg text-gray-600 mb-4">Together, we can achieve greatness and make a difference!</p> {/* Motivational Sentence */}
+      <p className="text-center text-lg text-gray-600 mb-4">Together, we can achieve greatness and make a difference!</p>
       
       <h2 className="text-2xl text-gray-600 font-bold mb-6 text-center">Your Reserved Seats:</h2>
       {formData.seat && formData.seat.length > 0 ? (
@@ -196,7 +162,7 @@ export default function Dashboard() {
                 <p className="mb-1"><strong>Description:</strong> {event.description}</p>
                 <p className="mb-1"><strong>Start:</strong> {event.start}</p>
                 <p className="mb-1"><strong>End:</strong> {event.end}</p>
-                <p className="mb-1"><strong>Available Seats:</strong> {event.total -  event.available} / {event.total}</p>
+                <p className="mb-1"><strong>Available Seats:</strong> {event.total - event.available} / {event.total}</p>
                 <button
                   onClick={() => handleTakeSpot(event.id)}
                   className={`mt-4 px-4 py-2 rounded text-white ${takingSpot || spotTaken.includes(event.id) || event.available === 0 ? 'bg-gray-400' : 'bg-blue-600'}`}

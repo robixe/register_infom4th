@@ -8,7 +8,7 @@ export default function Form() {
 
   // Define your role variable here or fetch it as needed
   if (!auth()) { // Only call auth() and check if authenticated
-    window.location.href = "/"; // Redirect to login if not authenticated
+    
   }
     const info = localStorage.getItem("info");
     if (info)
@@ -53,7 +53,7 @@ export default function Form() {
     confirm("are u sure this informatios is correct");
     if (Object.keys(validationErrors).length === 0) {
       try {
-      const token = localStorage.getItem("Token");
+      const token = localStorage.getItem("token");
       
 
       const requestBody = {
@@ -67,7 +67,6 @@ export default function Form() {
           study: formData.study,
         },
       };
-      
         const response = await fetch("https://infom4th-api.robixe.online/form", {
           method: "POST",
           headers: {

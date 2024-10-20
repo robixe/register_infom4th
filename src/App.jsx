@@ -12,7 +12,6 @@ import Verifier from './pages/root/Verifier';
 import RouteDashboard from './pages/root/RouteDashboard';
 import EventForm from './pages/root/Event';
 
-
 function App() {
 
 
