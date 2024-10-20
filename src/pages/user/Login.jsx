@@ -106,7 +106,7 @@ export default function Login() {
           <div className="absolute inset-0 bg-blue-900 opacity-50" />
           <div className="flex flex-col top-5 justify-center items-center p-10 text-white relative lg:mt-20 mt-[40%] z-10 ">
             <h2 className="text-3xl font-bold mb-9 ">CONNEXION</h2>
-            <form className="flex flex-col lg:w-2/3" onSubmit={handleSubmit}>
+            <form className="flex flex-col lg:w-2/3 w-full" onSubmit={handleSubmit}>
               <label className="text-1xl font-bold mb-2">Email</label>
               <input
                 id="email"
