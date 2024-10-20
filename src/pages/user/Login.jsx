@@ -25,12 +25,11 @@ export default function Login() {
           body: JSON.stringify({ email: email, pass: hashedPassword }), 
         });
 
-        console.log({ email: email, pass: hashedPassword });
-        console.log(response);
+        
 
         if (response.status === 200) {
           const data = await response.json();
-          console.log('Login successful:', data);
+          
           localStorage.setItem("Token", data.token);
           localStorage.setItem("role", data.role);
           localStorage.setItem("loginTimestamp", Date.now()); // Save current timestamp

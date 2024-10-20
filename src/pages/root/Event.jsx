@@ -29,7 +29,6 @@ const EventForm = () => {
             }
 
             const data = await response.json();
-            console.log(data);
             setEvents(data); // Set the fetched events
             localStorage.setItem("event", JSON.stringify(data));
 
@@ -49,7 +48,6 @@ const EventForm = () => {
             start,
             end,
         };
-        console.log(eventData);
         try {
             const response = await fetch('https://infom4th-api.robixe.online/events/add', {
                 method: 'POST',
@@ -61,7 +59,7 @@ const EventForm = () => {
 
             if (response.ok) {
                 const jsonResponse = await response.json();
-                console.log('Event added successfully:', jsonResponse);
+                
                 // Optionally, fetch events again to update the list
                 fetchEvents();
                 // Reset form fields
@@ -90,7 +88,6 @@ const EventForm = () => {
                 });
                 if (response.ok) {
                     const jsonResponse = await response;
-                    console.log('Event deleted successfully:', jsonResponse);
 
                     alert('Event deleted successfully!');
                     // Optionally, fetch events again to update the list
@@ -122,7 +119,6 @@ const EventForm = () => {
 
             if (response.ok) {
                 const jsonResponse = await response;
-                console.log('Seats added successfully:', jsonResponse);
                 alert('Seats added successfully!');
                 // Optionally, you can fetch events again to update the list or handle UI updates
             } else {

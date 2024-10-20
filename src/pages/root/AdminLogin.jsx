@@ -26,15 +26,12 @@ export default function AdminLogin() {
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log('Admin login successful:', data);
+
                     localStorage.setItem("Token", data.token);
                     if (data.role == "root") {
                         localStorage.setItem("token", data.token);
                         localStorage.setItem("role", data.role);
                         window.location.href = '/root/dashboard';
-                        console.log("nadi")
-                    } else {
-                        console.log("node jme3e karek")
                     }
                 } else {
                     handleResponseError(response);

@@ -29,7 +29,6 @@ function Verifier() {
 
       const data = await response.json();
       setUserStatus(data.status); // Assuming the response contains a status field
-      console.log(data);
       if (data) {
         setUserData(data); // Store the user data
       }
@@ -48,7 +47,6 @@ function Verifier() {
       memberId: userData.auth, // Assuming userData contains the member ID
       newType: membershipType, // New membership type
     };
-    console.log(body);
     try {
       const response = await fetch('https://infom4th-api.robixe.online/members/modify', {
         method: 'POST',
@@ -60,7 +58,6 @@ function Verifier() {
 
       if (response.ok) {
         const jsonResponse = await response.json();
-        console.log('Membership status updated successfully:', jsonResponse);
         alert('Membership status updated successfully!');
         // Optionally, you can refresh user data or update UI here
       } else {

@@ -20,14 +20,6 @@ export default function Register() {
 
     if (user && email && password) {
       const hashedPassword = MD5(password).toString();
-
-      // Debugging: Log the data being sent
-      console.log({
-      user: user,
-      email: email,
-      password: hashedPassword,
-    });
-
     try {
       const response = await fetch('https://infom4th-api.robixe.online/register', {
         method: 'POST',
@@ -39,7 +31,6 @@ export default function Register() {
 
       // Check for successful registration
       if (response.status === 201) {
-        console.log('Registration successful');
         window.location.href = '/'; 
       } else {
         // Handle non-successful responses

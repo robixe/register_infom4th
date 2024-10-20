@@ -59,7 +59,6 @@ export default function Dashboard() {
 
       const data = await response.json();
       const currentUser = data.find(user => user.first === JSON.parse(localStorage.getItem('info')).first); // Assuming email is stored in localStorage
-      console.log(currentUser);
 
       if (currentUser) {
         localStorage.setItem('info', JSON.stringify(currentUser));
@@ -98,7 +97,6 @@ export default function Dashboard() {
       if (response.ok) {
         alert('Spot taken successfully!');
         const data = await response.json();
-        console.log(data);
         setSpotTaken(prev => {
           const updatedSpots = [...prev, eventId]; // Add the taken eventId to the array
           localStorage.setItem('spotTaken', JSON.stringify(updatedSpots)); // Save to localStorage

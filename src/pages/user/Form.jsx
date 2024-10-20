@@ -54,7 +54,7 @@ export default function Form() {
     if (Object.keys(validationErrors).length === 0) {
       try {
       const token = localStorage.getItem("Token");
-      console.log("Token:", token);
+      
 
       const requestBody = {
         token : token,
@@ -67,7 +67,7 @@ export default function Form() {
           study: formData.study,
         },
       };
-      console.log(requestBody);
+      
         const response = await fetch("https://infom4th-api.robixe.online/form", {
           method: "POST",
           headers: {
@@ -78,7 +78,7 @@ export default function Form() {
   
         if (response.ok) {
           const data = await response;
-          console.log("Data submitted successfully:", data);
+          
           localStorage.setItem("info",JSON.stringify(formData));
           navigate("/dashboard");
         } else {

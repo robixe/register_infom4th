@@ -27,7 +27,6 @@ function RootDashboard() {
         }
 
         const data = await response.json();
-        console.log(data);
         const formattedData = data.map(user => ({
           id: user.id,
           name: user.first ? `${user.first} ${user.last}` : user.user,
