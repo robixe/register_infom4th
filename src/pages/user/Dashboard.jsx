@@ -167,7 +167,8 @@ export default function Dashboard() {
           <p className="mb-2"><strong>Phone:</strong> {formData.phone}</p>
           <p className="mb-2"><strong>Email:</strong> {formData.email}</p>
           <p className="mb-2"><strong>Field of Study:</strong> {formData.study}</p>
-          <p className="mb-2"><strong>Verification:</strong> {formData.auth}</p>
+          <p className="mb-2 px-4 py-2 bg-gradient-to-br from-gray-200 via-white to-gray-200 rounded-md backdrop-blur-md shadow-lg lg:w-[37%] w-[70%] text-indigo-800 font-bold ">
+            <strong>Verification:</strong> {formData.auth}</p>
 
           <div className="mt-6">
             <h3 className="text-xl text-gray-600 font-bold mb-4">
