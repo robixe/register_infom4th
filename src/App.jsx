@@ -11,6 +11,7 @@ import AdminLogin from './pages/root/AdminLogin';
 import Verifier from './pages/root/Verifier';
 import RouteDashboard from './pages/root/RouteDashboard';
 import EventForm from './pages/root/Event';
+import ResetPasswordComponent from './pages/restPassword';
 
 function App() {
 
@@ -28,6 +29,8 @@ function App() {
         <Route path='/root/verification' element={<Verifier/>} />
         <Route path='/root/dashboard' element={<RouteDashboard/>} />
         <Route path='/root/event' element={<EventForm  />} />
+        <Route path='/rest' element={<ResetPasswordComponent  />} />
+
       </Routes>
     </Router>
   )
