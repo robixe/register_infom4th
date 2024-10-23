@@ -100,11 +100,11 @@ export default function Login() {
 
       <div className="w-full md:w-1/2 relative min-h-screen">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute flex flex-col align-center  inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/bg.jpeg')" }}
         >
           <div className="absolute inset-0 bg-blue-900 opacity-50" />
-          <div className="flex flex-col top-5 justify-center items-center p-10 text-white relative lg:mt-20 mt-[40%] z-10 ">
+          <div className=" flex flex-col justify-center items-center h-full w-full p-10 text-white relative">
             <h2 className="text-3xl font-bold mb-9 ">CONNEXION</h2>
             <form className="flex flex-col lg:w-2/3 w-full" onSubmit={handleSubmit}>
               <label className="text-1xl font-bold mb-2">Email</label>
@@ -135,8 +135,7 @@ export default function Login() {
                     className="border-2 border-white lg:px-6 py-2 px-3 hover:bg-white hover:text-black rounded-md">INSCRIPTION</button>
                 </Link>
               </div>
-            </form>
-            <div className="mt-6 text-[12px] lg:-ml-[22%] ml-[3%]">
+              <div className="mt-6 text-[12px] flex flex-col items-start w-full">
               <a href="/password" className="underline hover:no-underline mb-1 block">Mot de passe oublié ?</a>
               <a href="/root/" className="underline hover:no-underline mb-1 block">Se connecter en Admin</a>
               <a href="#" className="underline hover:no-underline mb-1 block">
@@ -144,6 +143,8 @@ export default function Login() {
               </a>
               <Link to="/terms" className="underline hover:no-underline block">Informations légales</Link>
             </div>
+            </form>
+
           </div>
         </div>
       </div>
