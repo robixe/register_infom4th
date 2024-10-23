@@ -16,6 +16,7 @@ export default function Dashboard() {
     }
     fetchUserData();
     fetchEvents();
+    fetchEvents();
   }, []);
 
   const fetchUserData = useCallback(async () => {
