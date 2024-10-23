@@ -23,14 +23,11 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/terms" element={<Terms />} />
         <Route path='/form' element={<Form/>} />
-        <Route path='/password' element={<ForgotPasswordComponent/>} /> 
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/root/' element={<AdminLogin/>} />
         <Route path='/root/verification' element={<Verifier/>} />
         <Route path='/root/dashboard' element={<RouteDashboard/>} />
         <Route path='/root/event' element={<EventForm  />} />
-        <Route path='/rest' element={<ResetPasswordComponent  />} />
-
       </Routes>
     </Router>
   )
