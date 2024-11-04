@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MD5 from 'crypto-js/md5';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Register() {
   const [user, setUser] = useState('');
@@ -8,10 +8,13 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccessMessage(false);
 
     if (password !== confirmPassword) {
       setError('Passwords do not match');
@@ -31,7 +34,8 @@ export default function Register() {
 
         // Check for successful registration
         if (response.status === 201) {
-          window.location.href = '/';
+          setSuccessMessage(true);
+          // window.location.href = '/';
         } else {
           // Handle non-successful responses
           const errorData = await response;
@@ -51,6 +55,17 @@ export default function Register() {
     <div className="w-full md:w-1/2 relative min-h-screen">
     <div className="absolute inset-0 bg-cover bg-center w-full" style={{ backgroundImage: "url('/bg.jpeg')" }}>
       <div className="absolute inset-0 bg-blue-900 opacity-60" />
+       {/* Centered Success Message */}
+       {successMessage && (
+          <div className="fixed inset-0 flex items-center text-center justify-center z-50">
+            <div className=" w-[22%] h-[17%]  bg-indigo-100  text-indigo-800 border border-indigo-300 p-6 rounded-xl shadow-xl relative">
+              <span className='font-medium '>Check your email to verify your account before logging in.</span>
+              <button onClick={() => { setSuccessMessage(false); navigate('/'); }} className="absolute top-1 right-2 text-xl font-bold">
+                &times;
+              </button>
+            </div>
+          </div>
+        )}
       <div className="flex flex-col justify-center items-center w-full h-full p-10 text-white relative lg:mt-2 mt-[60px] z-10">
         <h2 className="text-3xl font-bold mb-9">INSCRIPTION</h2>
         <form className="flex flex-col lg:w-2/3 w-[100%]" onSubmit={handleSubmit}>
