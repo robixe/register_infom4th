@@ -5,7 +5,7 @@ import FormRegister from '../../components/1.Register/FormRegister';
 
 export default function Register() {
   return (
-    <div className="flex flex-col md:flex-row h-screen overflow-hidden">
+    <div className="flex flex-col md:flex-row h-screen ">
       {/* Left Section */}
       <LogoSection />
       {/* Right Section */}
