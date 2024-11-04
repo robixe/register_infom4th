@@ -10,6 +10,7 @@ export default function UserInfo({ formData }) {
         <p className="mb-2"><strong>First Name:</strong> {formData.first}</p>
         <p className="mb-2"><strong>Last Name:</strong> {formData.last}</p>
         <p className="mb-2"><strong>Email:</strong> {formData.email}</p>
+        <p className="mb-2"><strong>Pack:</strong> {formData.pack}</p>
         <p className="mb-2"><strong>payment:</strong> {formData.payment ? formData.payment : "None"}</p>
       </div>
       <p className="mb-2 px-4 py-2 flex md:items-center md:justify-center flex-col gap-1  text-indigo-800 font-bold ">
