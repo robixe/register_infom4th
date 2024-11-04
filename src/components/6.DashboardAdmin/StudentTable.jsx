@@ -6,7 +6,7 @@ const StudentTable = ({ students, filteredStudents }) => {
     <table className="w-full border-collapse">
       <thead>
         <tr className=" bg-gradient-to-r from-indigo-500 to-blue-500 text-white ">
-          {['ID', 'Name', 'Email', 'Phone', 'Membership', 'Birth', 'Gender', 'Study','Reserved Seats'].map((heading) => (
+          {['ID', 'Name', 'Email', 'Phone', 'Membership', 'Birth', 'Gender', 'Study','Payment'].map((heading) => (
             <th key={heading} className="lg:p-3 text-[15px] font-semibold border border-indigo-300">
               {heading}
             </th>
