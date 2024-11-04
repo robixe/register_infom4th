@@ -11,8 +11,13 @@ export default function Dashboard() {
   const [spotTaken, setSpotTaken] = useState([]);
 
   useEffect(() => {
-    if (!auth()) {
+    if (auth()) {
+      console.log("dode")
       window.location.href = "/";
+    }
+    else
+    {
+      console.log("doda")
     }
     fetchUserData();
     fetchEvents();
