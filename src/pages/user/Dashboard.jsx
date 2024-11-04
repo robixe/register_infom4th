@@ -11,17 +11,11 @@ export default function Dashboard() {
   const [spotTaken, setSpotTaken] = useState([]);
 
   useEffect(() => {
-    if (auth()) {
-      console.log("dode")
-      window.location.href = "/";
-    }
-    else
-    {
-      console.log("doda")
-    }
+    
     fetchUserData();
     fetchEvents();
     fetchEvents();
+    auth();
   }, []);
 
   const fetchUserData = useCallback(async () => {
@@ -36,6 +30,7 @@ export default function Dashboard() {
       if (response.ok) {
         const data = await response.json();
         console.log((data));
+        localStorage.setItem("role",data.role);
         if (
           JSON.stringify(data.id) == "null" ||
           JSON.stringify(data.auth) == "null" ||

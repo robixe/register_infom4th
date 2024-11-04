@@ -10,10 +10,7 @@ function RootDashboard() {
   
 
   useEffect(() => {
-    if (!rootauth())
-    {
-      window.location.href = "/root/"
-    }
+    rootauth();
     const fetchStudents = async () => {
       const token = localStorage.getItem("token");
       try {

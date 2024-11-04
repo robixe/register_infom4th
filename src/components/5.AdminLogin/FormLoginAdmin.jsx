@@ -33,6 +33,7 @@ export default function FormLoginAdmin() {
                     if (data.role == "root") {
                         localStorage.setItem("token", data.token);
                         localStorage.setItem("role", data.role);
+                        localStorage.setItem("loginTimestamp", Date.now());
                         window.location.href = '/root/dashboard';
                     }else{
                         window.location.href = '/';
