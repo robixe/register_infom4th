@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { rootauth } from '../../help';
+import NavBar from '../../components/6.DashboardAdmin/Navbar';
+import StudentSearch from '../../components/6.DashboardAdmin/StudentSearch';
+import StudentTable from '../../components/6.DashboardAdmin/StudentTable';
 
 function RootDashboard() {
   const [searchTerm, setSearchTerm] = useState(''); // State for the search term
@@ -64,77 +67,12 @@ function RootDashboard() {
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-gradient-to-r from-gray-300 via-blue-200 to-gray-300 ">
-     <nav className="w-full bg-white/30 backdrop-blur-md p-4 text-indigo-800 shadow-lg flex ">
-       <div className="lg:text-2xl text-[20px] font-bold lg:ml-16">Dashboard</div>
-      <div className="flex lg:space-x-14 space-x-4 lg:ml-[25%] ml-[13%] mt-1 lg:text-[16px]  text-[14px] font-[500]">
-        <a href="/root/dashboard" className="hover:text-blue-500 transition duration-300">Students</a>
-        <a href="/root/event" className="hover:text-blue-500 transition duration-300">Events</a>
-        <a href="/root/verification" className="hover:text-blue-500 transition duration-300">Verification</a>
-      </div>
-      <a
-        href="https://www.instagram.com/robixe.online/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hidden lg:flex space-x-2 text-black hover:text-blue-800 lg:ml-[22%] lg:mt-2"
-      >
-        <img src="/Robixe.png" alt="Robixe Logo" className="w-5 h-5" />
-        <span className="text-[12px] font-bold  ">Dev by Robixe</span>
-      </a>
-    {/* for small screens */}
-      <a
-     href="https://www.instagram.com/robixe.online/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="lg:hidden flex space-x-2 text-black hover:text-blue-800 absolute mt-[17%]  left-1/2 transform -translate-x-1/2"
-     >
-    <img src="/Robixe.png" alt="Robixe Logo" className="w-5 h-5" />
-    <span className="text-[12px] font-bold">Dev by Robixe</span>
-     </a>
-    </nav>
-
+     <NavBar />
     <div className="flex-grow flex items-center justify-center p-6">
       <div className="bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl w-full max-w-7xl p-9">
         <h1 className="lg:text-[28px] text-[25px] font-bold mb-6 text-indigo-800">Student Dashboard</h1>
-  
-        <input
-          type="text"
-          placeholder=" Search by name..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full p-2 mb-6 rounded-xl border border-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-400 transition"
-        />
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className=" bg-gradient-to-r from-indigo-500 to-blue-500 text-white ">
-                {['ID', 'Name', 'Email', 'Phone', 'Membership', 'Birth', 'Gender', 'Study','Reserved Seats'].map((heading) => (
-                  <th key={heading} className="lg:p-3 text-[15px] font-semibold border border-indigo-300">
-                    {heading}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {filteredStudents.length > 0 ? (
-                filteredStudents.map((student) => (
-                  <tr key={student.id} className="hover:bg-indigo-100 transition">
-                    {Object.values(student).map((value, idx) => (
-                      <td key={idx} className="lg:p-4 p-3 lg:text-[16px] text-[15px]  border border-indigo-300 text-gray-700">
-                        {value}
-                      </td>
-                    ))}
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="8" className="p-6 text-center text-gray-500">
-                    No students found
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+        <StudentSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <StudentTable  students={students} filteredStudents={filteredStudents}/>
       </div>
     </div>
     
