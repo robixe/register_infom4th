@@ -16,7 +16,7 @@ const EventManagement = () => {
             const token = localStorage.getItem('token'); // Retrieve token from local storage
             const body = JSON.stringify({ token }); // Prepare the body with the token
 
-            const response = await fetch('https://infom4th-api.robixe.online/info/events', {
+            const response = await fetch('https://infom4th-api-v2.robixe.online/events/info', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const EventManagement = () => {
             end,
         };
         try {
-            const response = await fetch('https://infom4th-api.robixe.online/events/add', {
+            const response = await fetch('https://infom4th-api-v2.robixe.online/events/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const EventManagement = () => {
         if (window.confirm("Are you sure you want to delete this event?")) {
             const token = localStorage.getItem("token");
             try {
-                const response = await fetch('https://infom4th-api.robixe.online/events/delete', {
+                const response = await fetch('https://infom4th-api-v2.robixe.online/events/delete', {
                     method: 'POST', // Use POST method as specified
                     headers: {
                         'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ const EventManagement = () => {
 
 
     return (
-        <div className="flex flex-col ">
+        <div className="flex flex-col mt-12">
         <div className=" bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl lg:mt-6 mt-[14%] p-6 md:w-1/2 w-[90%] max-w-xl mx-auto">
             <h2 className="text-2xl font-bold mb-4 text-center text-indigo-800">Add New Event</h2>
                 <form onSubmit={handleSubmit}>

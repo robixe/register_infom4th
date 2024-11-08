@@ -10,7 +10,8 @@ export default function FormContent() {
   if (!auth()) { // Only call auth() and check if authenticated
   }
     const info = JSON.parse(localStorage.getItem("info"));
-    console.log(info)
+   if (info)
+   {
     if (
       info.id != null &&
       info.auth != null &&
@@ -26,6 +27,7 @@ export default function FormContent() {
     ) {
       window.location.href= "/dashboard" ;
     }
+   }
   const [formData, setFormData] = useState({
     first: "", 
     last: "",
@@ -78,7 +80,7 @@ export default function FormContent() {
           study: formData.study,
         },
       };
-        const response = await fetch("https://infom4th-api.robixe.online/form", {
+        const response = await fetch("https://infom4th-api-v2.robixe.online/form", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

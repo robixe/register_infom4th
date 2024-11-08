@@ -14,7 +14,7 @@ function RootDashboard() {
     const fetchStudents = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch('https://infom4th-api.robixe.online/info/all', {
+        const response = await fetch('https://infom4th-api-v2.robixe.online/users/info', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -28,7 +28,6 @@ function RootDashboard() {
 
         const data = await response.json();
         const formattedData = data.map(user => ({
-          id: user.id,
           name: user.first ? `${user.first} ${user.last}` : user.user,
           email: user.email,
           phone: user.phone || 'N/A',
@@ -66,7 +65,7 @@ function RootDashboard() {
     <div className="flex flex-col min-h-screen w-full bg-gradient-to-r from-gray-300 via-blue-200 to-gray-300 ">
      <NavBar />
     <div className="flex-grow flex items-center justify-center py-6">
-      <div className="bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl w-full px-2">
+      <div className="bg-white/70 mt-12 backdrop-blur-lg shadow-2xl rounded-xl w-full px-2">
         <h1 className="lg:text-[28px] text-[25px] font-bold mb-6 ml-4 text-indigo-800">Student Dashboard</h1>
         <StudentSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <StudentTable  students={students} filteredStudents={filteredStudents}/>

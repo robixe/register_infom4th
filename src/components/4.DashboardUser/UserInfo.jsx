@@ -2,21 +2,24 @@ import { QRCodeCanvas } from 'qrcode.react';
 
 export default function UserInfo({ formData }) {
   const qrData = JSON.stringify(formData.auth);
-  console.log(formData)
   return (
-    <div className="bg-white/90 md:flex justify-between  md:w-1/2 w-full backdrop-blur-lg shadow-2xl rounded-xl p-8">
-      <div>
-        <h2 className="text-2xl text-gray-600 font-bold mb-6">Candidate Details:</h2>
-        <p className="mb-2"><strong>First Name:</strong> {formData.first}</p>
-        <p className="mb-2"><strong>Last Name:</strong> {formData.last}</p>
-        <p className="mb-2"><strong>Email:</strong> {formData.email}</p>
-        <p className="mb-2"><strong>Pack:</strong> {formData.pack}</p>
-        <p className="mb-2"><strong>payment:</strong> {formData.payment ? formData.payment : "None"}</p>
+    <div className="bg-white shadow-lg rounded-lg p-6 border sm:w-1/2 w-full  border-gray-200">
+      <h2 className="text-3xl text-gray-800 font-bold mb-4">Candidate Details</h2>
+      <div className='flex sm:flex-row justify-between items-center flex-col'>
+      <div className="space-y-1">
+        <p className="text-gray-700 text-lg"><strong>First Name:</strong> <span className="text-gray-900">{formData.first}</span></p>
+        <p className="text-gray-700 text-lg"><strong>Last Name:</strong> <span className="text-gray-900">{formData.last}</span></p>
+        <p className="text-gray-700 text-lg"><strong>Email:</strong> <span className="text-gray-900">{formData.email}</span></p>
+        <p className="text-gray-700 text-lg"><strong>Pack:</strong> <span className="text-gray-900">{formData.pack}</span></p>
+        <p className="text-gray-700 text-lg"><strong>Payment:</strong> <span className="text-gray-900">{formData.payment ? "Paid" : "No Paid"}</span></p>
       </div>
-      <p className="mb-2 px-4 py-2 flex md:items-center md:justify-center flex-col gap-1  text-indigo-800 font-bold ">
-          <strong>Verification:</strong> {formData.auth}
-          <QRCodeCanvas value={qrData} size={100} />
+      <div className="mt-6 flex flex-col items-center">
+        <p className="text-gray-800 font-semibold mb-2">
+          <strong>Verification:</strong> <span className="text-gray-900">{formData.auth}</span>
         </p>
+        <QRCodeCanvas value={qrData} size={130} className="shadow-md transition-transform transform hover:scale-110" />
+      </div>
+      </div>
     </div>
   );
 }

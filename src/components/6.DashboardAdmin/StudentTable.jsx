@@ -2,11 +2,11 @@ import React from 'react';
 
 const StudentTable = ({ students, filteredStudents }) => {
   return (
-    <div className="overflow-x-auto">
+    <div className="mt-2">
     <table className="w-full border-collapse">
       <thead>
         <tr className=" bg-gradient-to-r from-indigo-500 to-blue-500 text-white ">
-          {['ID', 'Name', 'Email', 'Phone', 'Membership', 'Birth', 'Gender', 'Study','Payment'].map((heading) => (
+          {['Name', 'Email', 'Phone', 'Membership', 'Birth', 'Gender', 'Study','Payment'].map((heading) => (
             <th key={heading} className="lg:p-3 text-[15px] font-semibold border border-indigo-300">
               {heading}
             </th>

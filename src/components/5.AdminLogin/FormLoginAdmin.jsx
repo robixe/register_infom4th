@@ -15,7 +15,7 @@ export default function FormLoginAdmin() {
         if (email && password) {
             try {
                 const hashedPassword = CryptoJS.MD5(password).toString();
-                const response = await fetch('https://infom4th-api.robixe.online/login', {
+                const response = await fetch('https://infom4th-api-v2.robixe.online/auth/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

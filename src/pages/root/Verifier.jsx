@@ -103,25 +103,25 @@ function Verifier() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen items-center w-full bg-gradient-to-r from-gray-300 via-blue-200 to-gray-300 ">
-    <NavBar />
-      <div className=" bg-white/70 backdrop-blur-lg shadow-2xl rounded-xl lg:mt-10 mt-[16%] p-6 md:w-1/2 w-[90%] max-w-xl mx-auto mb-10">
-        <h1 className="lg:text-2xl text-[22px] font-bold mb-6 text-center text-indigo-900 ">Code Verification Input for User Check</h1>
+    <div className="flex flex-col min-h-screen items-center w-full bg-white">
+      <NavBar />
+      <div className="bg-white shadow-lg rounded-xl lg:mt-10 mt-[16%] p-6 md:w-1/2 w-[90%] max-w-xl mx-auto mb-10">
+        <h1 className="lg:text-2xl text-[22px] font-bold mb-6 text-center text-indigo-600">Code Verification Input for User Check</h1>
         <input
           type='text'
-          placeholder='Code de verification'
+          placeholder='Verification Code'
           value={jsonInput}
           onChange={(e) => setJsonInput(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded-md mb-6 focus:outline-none focus:ring-1 focus:ring-blue-500"
-        /> 
+        />
         <div className='text-center'>
-        <button
-          className="w-[40%] py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-blue-700"
-          onClick={handleJsonInput}
-          disabled={loading} // Disable button while loading
-        >
-          {loading ? 'Checking...' : 'Check User'}
-        </button>
+          <button
+            className="w-[40%] py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-blue-700"
+            onClick={handleJsonInput}
+            disabled={loading} // Disable button while loading
+          >
+            {loading ? 'Checking...' : 'Check User'}
+          </button>
         </div>
         {userStatus && <p className="mt-4">User Status: {userStatus}</p>}
         {userData && (
@@ -134,14 +134,14 @@ function Verifier() {
             <p><strong>Birth Date:</strong> {userData.birth}</p>
             <p><strong>Study:</strong> {userData.study}</p>
             <p><strong>Pack:</strong> {userData.pack}</p>
-            <p><strong>Payment:</strong> {(userData.payment === "0" ||userData.payment === null ) ? 'Not Paid' : 'Paid'}</p>
+            <p><strong>Payment:</strong> {(userData.payment === "0" || userData.payment === null) ? 'Not Paid' : 'Paid'}</p>
             <p><strong>Seats:</strong> {userData.seat ? userData.seat.map(seat => seat.name).join(', ') : 'No seats reserved'}</p>
           </div>
         )}
         {userData && (
           <div className="mt-4">
             <button
-              className="w-full bg-green-500  py-2 text-white font-semibold rounded-md hover:bg-green-600 transition duration-200"
+              className="w-full bg-green-500 py-2 text-white font-semibold rounded-md hover:bg-green-600 transition duration-200"
               onClick={() => updatePaymentStatus(true)} // Mark as paid
             >
               Mark as Paid
@@ -152,12 +152,11 @@ function Verifier() {
             >
               Mark as Unpaid
             </button>
-          
             <select
               className="w-full p-2 border border-gray-300 rounded-md mb-4 mt-6 focus:outline-none focus:ring-1 focus:ring-blue-500"
               onChange={(e) => setMembershipType(e.target.value)}
             >
-               <option >Choose Pack</option>
+              <option>Choose Pack</option>
               <option value="begin">Pack Begin</option>
               <option value="vip">Pack Pro</option>
             </select>

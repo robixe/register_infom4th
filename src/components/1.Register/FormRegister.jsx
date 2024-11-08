@@ -24,7 +24,7 @@ export default function Register() {
     if (user && email && password) {
       const hashedPassword = MD5(password).toString();
       try {
-        const response = await fetch('https://infom4th-api.robixe.online/register', {
+        const response = await fetch('https://infom4th-api-v2.robixe.online/auth/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
