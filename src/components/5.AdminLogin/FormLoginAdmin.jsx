@@ -65,10 +65,10 @@ export default function FormLoginAdmin() {
             <div className="w-full md:w-1/2 relative min-h-screen">
             <div className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/bg.jpeg')" }}>
-             <div className="absolute inset-0 bg-blue-900 opacity-50 w-full" />
-                    <div className="flex flex-col top-5 justify-center items-center p-10 text-white relative mt-20  z-10">
+             <div className="absolute inset-0 bg-blue-900 opacity-50  w-full" />
+                    <div className=" flex flex-col justify-center items-center h-full w-full p-10 text-white relative">
                         <h2 className="lg:text-3xl text-2xl font-bold mb-9 lg:ml-0 text-center">CONNEXION ADMINISTRATEUR</h2>
-                        <form className="flex flex-col md:w-2/3 w-full" onSubmit={handleSubmit}>
+                        <form className="flex flex-col md:w-2/3 w-full  " onSubmit={handleSubmit}>
                             <label className="text-1xl font-bold mb-2">Email</label>
                             <input
                                 id="email"
