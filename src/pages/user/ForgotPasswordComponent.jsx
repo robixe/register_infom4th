@@ -12,7 +12,7 @@ const RequestResetPasswordComponent = () => {
     }
 
     try {
-      const response = await fetch('https://infom4th-api.robixe.online/members/request-reset', {
+      const response = await fetch('https://infom4th-api-v2.robixe.online/reset', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -21,11 +21,7 @@ const RequestResetPasswordComponent = () => {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
-        localStorage.removeItem("restPass");
-        localStorage.setItem("restPass" , result.message)
-        window.location.href = "/rest"
       } else {
-        const errorText = await response.text();
         setMessage(`not Found`);
       }
     } catch (error) {

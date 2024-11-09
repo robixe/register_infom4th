@@ -103,9 +103,9 @@ function Verifier() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen items-center w-full bg-white">
+    <div className="flex flex-col min-h-screen  items-center w-full bg-white">
       <NavBar />
-      <div className="bg-white shadow-lg rounded-xl lg:mt-10 mt-[16%] p-6 md:w-1/2 w-[90%] max-w-xl mx-auto mb-10">
+      <div className="bg-white shadow-lg rounded-xl  lg:mt-28 mt-[16%] p-6 md:w-1/2 w-[90%] max-w-xl mx-auto mb-10">
         <h1 className="lg:text-2xl text-[22px] font-bold mb-6 text-center text-indigo-600">Code Verification Input for User Check</h1>
         <input
           type='text'

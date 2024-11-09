@@ -40,13 +40,15 @@ const EventManagement = () => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        let token = localStorage.getItem("token");
         const eventData = {
+            token:token ,
             name: eventName,
-            description,
-            start,
-            end,
+            description :description,
+            start :start,
+            end :end,
         };
+        console.log(eventData);
         try {
             const response = await fetch('https://infom4th-api-v2.robixe.online/events/add', {
                 method: 'POST',
@@ -105,13 +107,15 @@ const EventManagement = () => {
 
     const addSpot = async (eventId) => {
         const count = prompt("Enter the number of seats to add:"); // Prompt to get count
+        let token = localStorage.getItem("token");
         const seatData = {
+            token : token,
             count: parseInt(count, 10), // Convert count to an integer
             id: eventId, // Event ID
         };
 
         try {
-            const response = await fetch('https://infom4th-api.robixe.online/seats/add', {
+            const response = await fetch('https://infom4th-api-v2.robixe.online/seats/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -121,6 +125,7 @@ const EventManagement = () => {
 
             if (response.ok) {
                 const jsonResponse = await response;
+                console.log(jsonResponse);
                 alert('Seats added successfully!');
                 // Optionally, you can fetch events again to update the list or handle UI updates
             } else {

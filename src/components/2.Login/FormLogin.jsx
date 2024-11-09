@@ -104,7 +104,7 @@ export default function Login() {
               </Link>
             </div>
             <div className="mt-6 text-[12px] flex flex-col items-start w-full">
-              <a href="#" className="underline hover:no-underline mb-1 block">Mot de passe oublié ?</a>
+              <a href="/forget" className="underline hover:no-underline mb-1 block">Mot de passe oublié ?</a>
               <a href="/root/" className="underline hover:no-underline mb-1 block">Se connecter en Admin</a>
               <a href="#" className="underline hover:no-underline mb-1 block">
                 Vous n'avez pas reçu le courriel de confirmation ?

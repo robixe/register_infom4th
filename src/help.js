@@ -50,7 +50,6 @@ export function rootauth() {
     const elapsed = currentTime - parseInt(loginTimestamp, 10);
     
     const oneDay = 60 * 60 * 1000; // 24 hours in milliseconds
-    console.log(oneDay,elapsed);
     if (elapsed > oneDay) {
         console.log("Token has expired");
         localStorage.removeItem("token");
