@@ -15,13 +15,9 @@ export default function Dashboard() {
     const storedSeats = localStorage.getItem('reservedSeats');
     return storedSeats ? JSON.parse(storedSeats) : [];
   });
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-  };
+  // Set a default theme (light)
+  const theme = 'light';
 
   useEffect(() => {
     if (!auth()) {

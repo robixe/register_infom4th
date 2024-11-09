@@ -93,7 +93,7 @@ export default function FormLoginAdmin() {
                             </div>
                         </form>
                         <div className="mt-6 text-[12px] lg:-ml-[50%] ml-[20%]">
-                            <Link to="#">
+                            <Link to="/forget">
                                 <span className="underline hover:no-underline mb-1 block">Mot de passe oublié ?</span>
                             </Link>
                         </div>
