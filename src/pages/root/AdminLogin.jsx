@@ -7,7 +7,7 @@ export default function AdminLogin() {
   const role = localStorage.getItem("role");
   if (token && role == "root" )
     {
-      window.location.href = "/dashboard"
+      window.location.href = "/root/dashboard"
     }
   return (
     <div className="flex flex-col md:flex-row bg-white h-screen">

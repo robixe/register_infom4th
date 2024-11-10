@@ -16,8 +16,7 @@ export function auth() {
     // Check if 24 hours have passed since the loginTimestamp
     const currentTime = Date.now();
     const elapsed = currentTime - parseInt(loginTimestamp, 10);
-    const oneDay = 60 * 60 * 1000; // 24 hours in milliseconds
-
+    const oneDay = 60 * 60 * 1000;
     if (elapsed > oneDay) {
         console.log("Token has expired");
         localStorage.removeItem("token");
@@ -49,7 +48,7 @@ export function rootauth() {
     const currentTime = Date.now();
     const elapsed = currentTime - parseInt(loginTimestamp, 10);
     
-    const oneDay = 60 * 60 * 1000; // 24 hours in milliseconds
+    const oneDay = 60 * 60 * 1000;
     if (elapsed > oneDay) {
         console.log("Token has expired");
         localStorage.removeItem("token");

@@ -51,6 +51,12 @@ const NavBar = () => {
           <Link to="/root/dashboard" className="block text-indigo-600 hover:text-blue-500 transition duration-300">Students</Link>
           <Link to="/root/event" className="block text-indigo-600 hover:text-blue-500 transition duration-300">Events</Link>
           <Link to="/root/verification" className="block text-indigo-600 hover:text-blue-500 transition duration-300">Verification</Link>
+          <button 
+          onClick={handleLogout} 
+          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition"
+        >
+          Logout 
+        </button>
         </div>
       )}
 
