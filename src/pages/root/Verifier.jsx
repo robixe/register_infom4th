@@ -16,7 +16,7 @@ function Verifier() {
 
     try {
       const token = localStorage.getItem("token"); // Retrieve token from local storage
-      const response = await fetch('https://infom4th-api.robixe.online/code', {
+      const response = await fetch('https://infom4th-api-v2.robixe.online/code', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,9 +29,10 @@ function Verifier() {
       }
 
       const data = await response.json();
+      console.log(data)
       setUserStatus(data.status); // Assuming the response contains a status field
       if (data) {
-        setUserData(data); // Store the user data
+        setUserData(data.user); // Store the user data
       }
     } catch (error) {
       console.error("Error checking user status:", error);
@@ -49,7 +50,7 @@ function Verifier() {
       newType: membershipType, // New membership type
     };
     try {
-      const response = await fetch('https://infom4th-api.robixe.online/members/modify', {
+      const response = await fetch('https://infom4th-api-v2.robixe.online/members/modify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +81,7 @@ function Verifier() {
     };
 
     try {
-      const response = await fetch('https://infom4th-api.robixe.online/members/payment', {
+      const response = await fetch('https://infom4th-api-v2.robixe.online/members/payment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
