@@ -25,7 +25,7 @@ const StudentTable = ({ students, filteredStudents }) => {
   }
 
   return (
-    <div className="mt-2">
+    <div className="">
       <table className="w-full border-collapse">
         <thead>
           <tr className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white">

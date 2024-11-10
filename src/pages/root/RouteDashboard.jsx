@@ -65,12 +65,9 @@ function RootDashboard() {
   return (
     <div className="flex flex-col min-h-screen w-full bg-gradient-to-r from-gray-300 via-blue-200 to-gray-300 ">
       <NavBar />
-      <div className="flex justify-end p-4">
-        
-      </div>
       <div className="flex-grow flex items-center justify-center py-6">
         <div className="bg-white/70 mt-12 backdrop-blur-lg shadow-2xl rounded-xl w-full px-2">
-          <h1 className="lg:text-[28px] text-[25px] font-bold mb-6 ml-4 text-indigo-800">Student Dashboard</h1>
+          <h1 className="lg:text-[28px] text-[25px] font-bold mb-6 mt-6 ml-4 text-indigo-800">Student Dashboard</h1>
           <StudentSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <StudentTable students={students} filteredStudents={filteredStudents}/>
         </div>
