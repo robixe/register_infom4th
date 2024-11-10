@@ -53,7 +53,7 @@ const NavBar = () => {
           <Link to="/root/verification" className="block text-indigo-600 hover:text-blue-500 transition duration-300">Verification</Link>
           <button 
           onClick={handleLogout} 
-          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition"
+          className="px-4 py-2 mt-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition"
         >
           Logout 
         </button>
