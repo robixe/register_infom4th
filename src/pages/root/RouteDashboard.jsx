@@ -7,7 +7,8 @@ import StudentTable from '../../components/6.DashboardAdmin/StudentTable';
 function RootDashboard() {
   const [searchTerm, setSearchTerm] = useState(''); // State for the search term
   const [students, setStudents] = useState([]); // State to hold student data
-  
+
+ 
 
   useEffect(() => {
     rootauth();
@@ -31,11 +32,11 @@ function RootDashboard() {
           name: user.first ? `${user.first} ${user.last}` : user.user,
           email: user.email,
           phone: user.phone || 'N/A',
-          membership: user.pack || 'N/A', // Assuming role is used as membership
+          membership: user.pack || 'N/A',
           birth: user.birth || 'N/A',
           gender: user.gender || 'N/A',
           study: user.study || 'N/A',
-          seat: user.payment ? "Paid": 'No Paid' // Joining seat names if available
+          seat: user.payment ? "Paid" : 'No Paid'
         }));
 
         // Store the fetched data in local storage
@@ -63,16 +64,18 @@ function RootDashboard() {
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-gradient-to-r from-gray-300 via-blue-200 to-gray-300 ">
-     <NavBar />
-    <div className="flex-grow flex items-center justify-center py-6">
-      <div className="bg-white/70 mt-12 backdrop-blur-lg shadow-2xl rounded-xl w-full px-2">
-        <h1 className="lg:text-[28px] text-[25px] font-bold mb-6 ml-4 text-indigo-800">Student Dashboard</h1>
-        <StudentSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <StudentTable  students={students} filteredStudents={filteredStudents}/>
+      <NavBar />
+      <div className="flex justify-end p-4">
+        
+      </div>
+      <div className="flex-grow flex items-center justify-center py-6">
+        <div className="bg-white/70 mt-12 backdrop-blur-lg shadow-2xl rounded-xl w-full px-2">
+          <h1 className="lg:text-[28px] text-[25px] font-bold mb-6 ml-4 text-indigo-800">Student Dashboard</h1>
+          <StudentSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <StudentTable students={students} filteredStudents={filteredStudents}/>
+        </div>
       </div>
     </div>
-    
-  </div>
   );
 }
 

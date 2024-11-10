@@ -7,6 +7,10 @@ const NavBar = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Remove the token or any relevant auth data
+    window.location.href = '/root/'; // Redirect to login page
+  };
 
   return (
     <nav className="w-full fixed z-10 bg-gradient-to-r from-indigo-500 to-blue-500 p-4 text-white flex justify-between items-center px-4 shadow-lg">
@@ -21,9 +25,15 @@ const NavBar = () => {
           rel="noopener noreferrer"
           className="flex items-center text-white hover:text-blue-200 transition duration-300"
         >
-          <img src="/Robixe.png" alt="Robixe Logo" className="w-5 h-5 mr-1" />
+          <img src="/tee.png" alt="Robixe Logo" className="w-5 h-5 mr-1" />
           <span className="text-[12px] font-bold">Dev by Robixe</span>
         </a>
+        <button 
+          onClick={handleLogout} 
+          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition"
+        >
+          Logout 
+        </button>
       </div>
 
       {/* Hamburger Menu for Small Screens */}

@@ -40,13 +40,10 @@ export default function Login() {
           } else {
             window.location.href = '/root/';
           }
-        } else if (response.status === 409) {
-          handleErrorResponse("virifier votre compte");
-        } else {
-          handleErrorResponse(response);
         }
+        handleErrorResponse(response);
       } catch (error) {
-        setError(error.message || 'An unexpected error occurred.');
+        setError(error.message);
       }
     } else {
       setError('Please fill in both email and password fields.');
@@ -55,13 +52,16 @@ export default function Login() {
 
   const handleErrorResponse = (response) => {
     if (response.status === 400) {
-      throw new Error('Bad Request: Missing credentials.');
+      throw new Error('Incorrect email or password.');
     } else if (response.status === 401) {
-      throw new Error('Unauthorized: Incorrect email or password.');
-    } else if (response.status === 500) {
-      throw new Error('Server error. Please try again later.');
+      throw new Error('Incorrect email or password.');
+    } else if (response.status === 409) {
+      throw new Error('Please fill in both email and password fields. and verifier email in 30 min');
+    }
+     else if (response.status === 500) {
+      throw new Error('Please try again later.');
     } else {
-      throw new Error('An unexpected error occurred. Please try again.');
+      throw new Error('Please try again.');
     }
   };
 
