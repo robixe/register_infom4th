@@ -68,7 +68,7 @@ export default function FormContent() {
       try {
       const token = localStorage.getItem("token");
       
-
+        
       const requestBody = {
         token : token,
         data: {
@@ -80,6 +80,7 @@ export default function FormContent() {
           study: formData.study,
         },
       };
+      console.log(requestBody)
         const response = await fetch("https://infom4th-api-v2.robixe.online/form", {
           method: "POST",
           headers: {

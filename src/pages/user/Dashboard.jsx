@@ -38,18 +38,19 @@ export default function Dashboard() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("role", data.user.role);
+        console.log(data)
         if (
-          JSON.stringify(data.id) === "null" ||
-          JSON.stringify(data.auth) === "null" ||
-          JSON.stringify(data.user) === "null" ||
-          JSON.stringify(data.email) === "null" ||
-          JSON.stringify(data.role) === "null" ||
-          JSON.stringify(data.first) === "null" ||
-          JSON.stringify(data.last) === "null" ||
-          JSON.stringify(data.gender) === "null" ||
-          JSON.stringify(data.birth) === "null" ||
-          JSON.stringify(data.phone) === "null" ||
-          JSON.stringify(data.study) === "null"
+          JSON.stringify(data.user.id) === "null" ||
+          JSON.stringify(data.user.auth) === "null" ||
+          JSON.stringify(data.user.user) === "null" ||
+          JSON.stringify(data.user.email) === "null" ||
+          JSON.stringify(data.user.role) === "null" ||
+          JSON.stringify(data.user.first) === "null" ||
+          JSON.stringify(data.user.last) === "null" ||
+          JSON.stringify(data.user.gender) === "null" ||
+          JSON.stringify(data.user.birth) === "null" ||
+          JSON.stringify(data.user.phone) === "null" ||
+          JSON.stringify(data.user.study) === "null"
         ) {
           window.location.href = "/form";
         }
