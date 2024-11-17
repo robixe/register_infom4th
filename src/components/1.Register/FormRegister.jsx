@@ -60,7 +60,7 @@ export default function Register() {
           <div className="fixed inset-0 flex items-center text-center justify-center z-50">
             <div className=" lg:w-[30%] lg:h-[20%] w-[80%]  bg-indigo-100  text-indigo-800 border border-indigo-300 p-6 rounded-xl shadow-xl relative">
               <span className='font-medium '>Check your email to verify your account before logging in.
-               If you don't verify your account within 30 minutes, it will be deleted.</span>
+               If you don't verify your account within 30 minutes, it will be deleted. <strong>if you dont find your email check the spam  </strong></span>
               <button onClick={() => { setSuccessMessage(false); navigate('/'); }} className="absolute top-1 right-2 text-2xl font-bold">
                 &times;
               </button>

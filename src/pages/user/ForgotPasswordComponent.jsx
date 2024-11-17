@@ -38,7 +38,7 @@ const RequestResetPasswordComponent = () => {
         {successMessage && (
           <div className="fixed inset-0 flex items-center text-center justify-center z-50">
             <div className="lg:w-[30%] lg:h-[20%] w-[80%] bg-indigo-100 text-indigo-800 border border-indigo-300 p-6 rounded-xl shadow-xl relative">
-              <span className='font-medium'>{message}</span>
+              <span className='font-medium'>{message} <br /> <strong>if you dont find your email check the spam  </strong> </span>
               <button onClick={() => setSuccessMessage(false)} className="absolute top-1 right-2 text-2xl font-bold">
                 &times;
               </button>
