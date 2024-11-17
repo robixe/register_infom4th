@@ -8,6 +8,7 @@ export function auth() {
         console.log("You do not have a valid token");
         localStorage.removeItem("token");
         localStorage.removeItem("role");
+        localStorage.removeItem("info");
         localStorage.removeItem("loginTimestamp");
         window.location.href = "/";
         return false; // Return false to indicate authentication failure
@@ -21,6 +22,8 @@ export function auth() {
         console.log("Token has expired");
         localStorage.removeItem("token");
         localStorage.removeItem("role");
+        localStorage.removeItem("eventsData");
+        localStorage.removeItem("info");
         localStorage.removeItem("loginTimestamp");
         window.location.href = "/";
         return false; // Return false to indicate authentication failure
@@ -39,6 +42,7 @@ export function rootauth() {
         console.log("You do not have a valid token");
         localStorage.removeItem("token");
         localStorage.removeItem("role");
+        localStorage.removeItem("info");
         localStorage.removeItem("loginTimestamp");
         window.location.href = "/root";
         return false; // Return false to indicate authentication failure
@@ -52,6 +56,7 @@ export function rootauth() {
     if (elapsed > oneDay) {
         console.log("Token has expired");
         localStorage.removeItem("token");
+        localStorage.removeItem("info");
         localStorage.removeItem("role");
         localStorage.removeItem("loginTimestamp");
         window.location.href = "/root";
